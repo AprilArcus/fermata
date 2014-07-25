@@ -11,7 +11,7 @@
 
 class Loop < ActiveRecord::Base
 
-  validates :author_id, :json, presence: true
+  validates :author_id, :time_slices, presence: true
 
   belongs_to :author, class_name: 'User'
 

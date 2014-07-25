@@ -14,8 +14,8 @@ Dianthus.Views.LoopsIndex = Backbone.CompositeView.extend({
   addLoop: function(loop) {
     var selector = 'ul';
     var view = new Dianthus.Views.LoopItem( {model: loop} );
-    this.addSubview(selector, view);
-    this.listenTo(view, 'remove', this.removeSubview.bind(this, selector));
+    this.addSubview(view, selector);
+    this.listenTo(view, 'remove', this.removeSubview.bind(selector, this));
   },
 
   events: { 'click .new': 'new' },

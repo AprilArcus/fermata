@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724172255) do
+ActiveRecord::Schema.define(version: 20140725164029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "loops", force: true do |t|
-    t.integer  "author_id",  null: false
-    t.text     "json",       null: false
+    t.integer  "author_id",   null: false
+    t.text     "time_slices", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",      null: false
+    t.string   "title",       null: false
   end
 
   add_index "loops", ["author_id"], name: "index_loops_on_author_id", using: :btree

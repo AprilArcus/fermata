@@ -6,22 +6,28 @@ window.Dianthus = {
   initialize: function() {
     // alert('Hello from Backbone!');
     new Dianthus.Routers.Router( {$el: $('#main')} );
-    Dianthus.solfege = ['do', 're', 'mi', 'fa', 'so', 'la', 'ti'];
     Backbone.history.start();
-
     MIDI.loadPlugin({
       soundfontUrl: "/assets/soundfont/",
       instrument: "acoustic_grand_piano",
       callback: function() {
-        var delay = 0; // play one note every quarter second
-        var note = 50; // the MIDI note
-        var velocity = 127; // how hard the note hits
-        // play the note
         MIDI.setVolume(0, 127);
-        MIDI.noteOn(0, note, velocity, delay);
-        MIDI.noteOff(0, note, delay + 0.75);
+        // this would be a good place to halt a load indicator
       }
     });
 
+
   }
+};
+
+// Constants
+Dianthus.SOLFEGE = ['do', 're', 'mi', 'fa', 'so', 'la', 'ti'];
+Dianthus.MAJOR = [0, 2, 4, 5, 7, 9, 11];
+Dianthus.MINOR = [0, 2, 3, 5, 7, 8, 10];
+
+//Utility functions
+Dianthus.transpose = function(noteIndex, key, mode) {
+  var noteType = noteIndex % 7;
+  var octave = ~~(noteIndex / 7); // integer division
+  // mode[noteType] + octave*12;
 };

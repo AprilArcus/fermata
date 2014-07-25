@@ -7,7 +7,7 @@ Dianthus.Views.UserShow = Backbone.CompositeView.extend({
     var loopsIndexView = new Dianthus.Views.LoopsIndex({
                                collection: this.model.loops()
                              });
-    this.addSubview('#my-loops', loopsIndexView);
+    this.addSubview(loopsIndexView, '#my-loops');
 
     // friends loops
   },
