@@ -19,3 +19,53 @@
 @import "font-awesome";
 
 body { padding-top: 70px; }
+
+html, body, .backdrop, .container, #composer, .time-interval {
+  height: 100%;
+}
+#composer {
+  display: -webkit-flex;
+  display: flex;
+
+  flex-direction: row;
+  -webkit-flex-direction: row;
+}
+.time-interval {
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-direction: column;
+  flex-direction: column;
+
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.note {
+  width: 100%;
+  padding: 3px;
+  background-clip: content-box;
+  background-color: #eee;
+  border-radius: 9px;
+}
+[data-note="do"], [data-note="so"] {
+  -webkit-flex-grow: 1.618;
+  flex-grow: 1.618;
+}
+[data-note="mi"], [data-note="ti"] {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+[data-note="re"], [data-note="fa"], [data-note="la"] {
+  -webkit-flex-grow: 0.618;
+  flex-grow: 0.618;
+}
+[data-continued="true"] {
+  padding-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+[data-continues="true"] {
+  padding-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

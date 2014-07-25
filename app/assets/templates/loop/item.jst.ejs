@@ -1,0 +1,4 @@
+<%= loop.escape('title') %>
+<% if (loop.get('author_id') === Dianthus.currentUser.id) { %>
+<button class="destroy">Delete</button>
+<% } %>

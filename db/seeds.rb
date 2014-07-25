@@ -8,3 +8,7 @@
 
 guest = User.create(email: 'guest@example.com',
                     password: 'password')
+
+guest.loops.create(title: 'loopy', json: 'bogus data')
+guest.loops.create(title: 'bloopy', json: 'bogus data')
+guest.loops.create(title: 'snoopy', json: 'bogus data')
