@@ -29,5 +29,6 @@ Dianthus.MINOR = [0, 2, 3, 5, 7, 8, 10];
 Dianthus.transpose = function(noteIndex, key, mode) {
   var noteType = noteIndex % 7;
   var octave = ~~(noteIndex / 7); // integer division
-  // mode[noteType] + octave*12;
+  var modulatedNote = mode[noteType] + octave*12; // tonic is now 12
+  return modulatedNote - 12 + key;
 };
