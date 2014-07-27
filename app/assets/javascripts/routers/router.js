@@ -17,7 +17,7 @@ Dianthus.Routers.Router = Backbone.Router.extend({
   },
 
   loopCreate: function() {
-    var loopComposeView = new Dianthus.Views.LoopCompose({
+    var loopComposeView = new Dianthus.Views.LoopComposeForm({
       model: new Dianthus.Models.Loop()
     });
     this._swapView(loopComposeView);

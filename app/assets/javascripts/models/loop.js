@@ -3,13 +3,18 @@ Dianthus.Models.Loop = Backbone.Model.extend({
   urlRoot: '/api/loops',
 
   parse: function(response) {
-    this.time_slices = JSON.parse(response.time_slices);
-    delete response.time_slices;
+    response.time_slices = JSON.parse(response.time_slices);
     return response;
   },
 
   defaults: function() {
     return {time_slices: this.emptyLoop()};
+  },
+
+  toJSON: function() {
+    var payload = Backbone.Model.prototype.toJSON.apply(this, arguments);
+    payload.time_slices = JSON.stringify(this.get('time_slices'));
+    return payload;
   },
 
   emptyLoop: function() {

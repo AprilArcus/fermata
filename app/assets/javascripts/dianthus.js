@@ -5,7 +5,7 @@ window.Dianthus = {
   Routers: {},
   initialize: function() {
     // alert('Hello from Backbone!');
-    new Dianthus.Routers.Router( {$el: $('#main')} );
+    new Dianthus.Routers.Router( {$el: $('#Dianthus-Routers-SwapView-Target')} );
     Backbone.history.start();
     MIDI.loadPlugin({
       soundfontUrl: "/assets/soundfont/",

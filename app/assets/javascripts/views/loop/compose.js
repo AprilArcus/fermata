@@ -12,7 +12,7 @@ Dianthus.Views.LoopCompose = Backbone.View.extend({
     this.timeSlices = this.model.get('time_slices');
   },
 
-  id: 'composer',
+  id: 'Dianthus-Views-LoopCompose',
 
   events: {'click .note': 'click',
            // remove the animation so we can trigger it again

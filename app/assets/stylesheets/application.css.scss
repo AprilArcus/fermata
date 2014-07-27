@@ -18,12 +18,51 @@
 @import "bootstrap";
 @import "font-awesome";
 
-body { padding-top: 70px; }
+input::-webkit-color-swatch-wrapper { padding: 0; }
 
-html, body, .backdrop, .container, #composer, .time-slice {
+input::-webkit-color-swatch { border-radius: $border-radius-base; }
+input::-moz-color-swatch { border-radius: $border-radius-base; }
+
+input[type="color"] {
+  min-width: 34px !important;
+  padding: 5px 5px !important;
+}
+
+
+html,
+body,
+.container-fluid,
+#Dianthus-Routers-SwapView-Target,
+#Dianthus-Views-LoopComposeForm {
   height: 100%;
 }
-#composer {
+
+#Dianthus-Views-LoopComposeForm {
+  display: -webkit-flex;
+  display: flex;
+
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+#Dianthus-Views-LoopCompose-Target {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+
+  display: -webkit-flex;
+  display: flex;
+
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+#Dianthus-Views-LoopCompose,
+.time-slice {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+
+#Dianthus-Views-LoopCompose {
   display: -webkit-flex;
   display: flex;
 
@@ -62,11 +101,19 @@ html, body, .backdrop, .container, #composer, .time-slice {
 
 .note {
   width: 100%;
-  padding: 3px;
+  padding: 2px;
   background-clip: content-box;
   background-color: #eee;
-  border-radius: 9px;
+  border-radius: $border-radius-base * 2;
 }
+
+@media screen and (max-width: 767px) {
+  .note {
+    padding: 1px;
+    border-radius: $border-radius-small * 2;
+  }
+}
+
 .note-do, .note-so {
   -webkit-flex-grow: 1.618;
   flex-grow: 1.618;
@@ -91,4 +138,21 @@ html, body, .backdrop, .container, #composer, .time-slice {
   padding-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+/* no love in safari. pull-right has side effects. wrap in a div? */
+#Dianthus-Views-LoopComposeForm-Submit {
+  margin-left: auto;
+}
+
+#Dianthus-Views-LoopComposeForm .form-inline .form-group {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+#Dianthus-Views-LoopComposeForm .form-inline .form-group > * {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+  margin-bottom: 0;
 }

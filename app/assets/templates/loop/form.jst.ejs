@@ -1,0 +1,71 @@
+<form id="Dianthus-Views-LoopComposeForm-Options"
+      class="form-inline"
+      role="form">
+  <div class="form-group">
+    <label class="control-label hidden-xs">
+      Listen in the key of
+    </label>
+    <select class="form-control">
+      <option>A</option>
+      <option>A♯/B♭</option>
+      <option>B</option>
+      <option selected="selected">C</option>
+      <option>C♯/D♭</option>
+      <option>D</option>
+      <option>D♯/E♭</option>
+      <option>E</option>
+      <option>F</option>
+      <option>F♯/G♭</option>
+      <option>G</option>
+      <option>G♯/A♭</option>
+    </select>
+    <select class="form-control">
+      <option selected="selected">Major</option>
+      <option>Minor</option>
+    </select>
+  </div> <!-- ./form-group -->
+  <div class="form-group">
+    <label class="control-label hidden-xs">
+      on the
+    </label>
+    <select class="form-control">
+      <option selected="selected">Acoustic Grand Piano</option>
+      <option>Synth Drum</option>
+    </select>
+  </div> <!-- ./form-group -->
+</form>
+<div id="Dianthus-Views-LoopCompose-Target"></div>
+<form id="Dianthus-Views-LoopComposeForm-Submit"
+      class="form-inline"
+      role="form">
+  <div class="pull-right">
+    <div class="form-group">
+      <label class="sr-only"
+             for="color">
+        Color
+      </label>
+      <input type="color"
+             name="loop[color]"
+             class="form-control"
+             id="color"> <!-- TODO polyfill available:
+                              http://bgrins.github.io/spectrum/ -->
+    </div> <!-- ./form-group -->
+    <div class="form-group">
+      <label class="sr-only"
+             for="title">
+        Title
+      </label>
+      <input type="text"
+             name="loop[title]"
+             class="form-control"
+             id="title"
+             placeholder="Untitled">
+    </div> <!-- ./form-group -->
+    <div class="form-group">
+      <button type="submit"
+              class="btn btn-default">
+        Save
+      </button>
+    </div> <!-- ./form-group -->
+  </div> <!-- ./pull-right -->
+</form>
