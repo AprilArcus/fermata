@@ -15,6 +15,11 @@
  *= require_tree .
  */
 
+/* TODO: Inherit from theme and transparentize only in the grid view ? */
+
+$btn-default-bg: rgba(255, 255, 255, 0.5);
+$input-bg: rgba(255, 255, 255, 0.5);
+
 @import "bootstrap";
 @import "font-awesome";
 
@@ -28,10 +33,15 @@ input[type="color"] {
   padding: 5px 5px !important;
 }
 
+#submit {
+  /* c.f. component-animations.less line 12 */
+  transition: background 150ms linear;
+  transition: color 40ms linear;
+}
+
 
 html,
 body,
-.container-fluid,
 #Dianthus-Routers-SwapView-Target,
 #Dianthus-Views-LoopComposeForm {
   height: 100%;
@@ -46,6 +56,8 @@ body,
 }
 
 #Dianthus-Views-LoopCompose-Target {
+  padding: $panel-body-padding;
+
   -webkit-flex-grow: 1;
   flex-grow: 1;
 
@@ -54,6 +66,10 @@ body,
 
   flex-direction: column;
   -webkit-flex-direction: column;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 #Dianthus-Views-LoopCompose,
@@ -140,19 +156,93 @@ body,
   border-bottom-left-radius: 0;
 }
 
-/* no love in safari. pull-right has side effects. wrap in a div? */
+#Dianthus-Views-LoopComposeForm {
+  .navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .navbar-form {
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .navbar-form > * {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+
+  .navbar-form { /* navbar-left is useless */
+    padding-left: 0;
+    margin-left: 0;
+    display: inline-block;
+    width: auto;
+  }
+
+  .navbar-right {
+    float: right; /* even on small devices */
+  }
+
+}
+
+#Dianthus-Views-LoopComposeForm-Options {
+  border-top: none;
+}
+
 #Dianthus-Views-LoopComposeForm-Submit {
-  margin-left: auto;
+  border-bottom: none;
 }
 
-#Dianthus-Views-LoopComposeForm .form-inline .form-group {
-  display: inline-block;
-  margin-bottom: 0;
+@media screen and (max-width: 480px) {
+  #mode-radio {
+    display: none;
+  }
+
+  /* copied straight out of the bootstrap source, horribly, because
+     SASS won't let us @extend inside an @media query
+     c.f. http://www.sitepoint.com/cross-media-query-extend-sass/ */
+  /* assets/stylesheets/bootstrap/_buttons.scss line 130 */
+  .btn {
+    @include button-size($padding-small-vertical,
+                         $padding-small-horizontal,
+                         $font-size-small,
+                         $line-height-small,
+                         $border-radius-small);
+  }
+  /* unpacked because I do not grok the crazy LESS -> SASS
+     converter hack this is built on top of.
+     c.f. assets/stylesheets/bootstrap/_forms.scss line 311
+     c.f. assets/stylesheets/bootstrap/mixins/_forms.scss line 66
+     c.f. tasks/converter/less_conversion.rb line 321 */
+  .form-control {
+    height: $input-height-small;
+    padding: $padding-small-vertical $padding-small-horizontal;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    border-radius: $border-radius-small;    
+  }
+  select.form-control {
+    line-height: $input-height-small;
+  }
+  textarea.form-control {
+    height: auto;
+  }
+
+  input::-webkit-color-swatch { border-radius: $border-radius-small; }
+  input::-moz-color-swatch { border-radius: $border-radius-small; }
+
+  input[type="color"] {
+    min-width: 30px !important;
+  }
+
 }
 
-#Dianthus-Views-LoopComposeForm .form-inline .form-group > * {
-  display: inline-block;
-  width: auto;
-  vertical-align: middle;
-  margin-bottom: 0;
+@media screen and (min-width: 481px) {
+  #mode-select {
+    display: none;
+  }
 }
