@@ -1,18 +1,31 @@
 Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
 
   initialize: function() {
-    composer = new Dianthus.Views.LoopCompose({model: this.model});
-    this.addSubview('#Dianthus-Views-LoopCompose-Target', composer);
+    this.composer = new Dianthus.Views.LoopCompose({model: this.model});
+    this.addSubview('#Dianthus-Views-LoopCompose-Target', this.composer);
   },
 
   id: 'Dianthus-Views-LoopComposeForm',
 
-  events: {'change select': 'syncRadioToSelect',
+  events: {'click #play-pause': 'playPause',
+           'change select': 'syncRadioToSelect',
            'change input[type="radio"]': 'syncSelectToRadio',
+           'change input[type="radio"][name="key"]': 'updateKey',
+           'change input[type="radio"][name="mode"]': 'updateMode',
            'change #color': 'updateColor',
            'focus #title': 'highlightSave',
            'blur #title': 'dimSave',
-           'submit form': 'submit'},
+           'submit form': 'submit',
+           
+  },
+
+  playPause: function(event) {
+    if (this.composer.playing) {
+      this.composer.pause();
+    } else {
+      this.composer.play();
+    }
+  },
 
   syncRadioToSelect: function(event) {
     if (event.target.id === 'instrument') return; // blacklist
@@ -40,8 +53,17 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     $select.val(value);
   },
 
+  updateKey: function(event) {
+    this.composer.key = MIDI.keyToNote[event.target.value + '4'];
+  },
+
+  updateMode: function(event) {
+    this.composer.mode = Dianthus.Modes[event.target.value];
+  },
+
   updateColor: function(event) {
-    this.updateUIColor(event.target.value);
+    var color = event.target.value;
+    this.updateUIColor(color);
   },
 
   updateUIColor: function(color) {
@@ -53,8 +75,8 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     var perceptiveLuminance = 1 - (0.299 * red +
                                    0.587 * green +
                                    0.114 * blue) / 255;
-    $('.navbar').css({'background-color': event.target.value,
-                      'color': (perceptiveLuminance < 0.5) ? 'black' : 'white'});
+    this.$('.navbar').css({'background-color': color,
+                           'color': (perceptiveLuminance < 0.5) ? 'black' : 'white'});
   },
 
   highlightSave: function(event) {
@@ -67,13 +89,21 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
 
   submit: function(event) {
     event.preventDefault();
+    var options = $('#Dianthus-Views-LoopComposeForm-Options form').serializeJSON();
     var formData = $(event.target).serializeJSON();
+    _(formData).extend(options);
     var loop = this.model;
-    loop.save(formData.loop,
+    loop.save(formData,
             { patch: !loop.isNew(),
               success: function() {
                 Dianthus.currentUser.loops().add(loop, {merge: true});
                 Backbone.history.navigate('#', {trigger: true});
+              },
+              error: function(model, response) {
+                var titleError = (JSON.parse(response.responseText).title[0]);
+                $titleAlert = $('.alert-title');
+                $titleAlert.find('.alert-message').html(titleError);
+                $titleAlert.addClass('alert-danger');
               }
             });
   },
@@ -83,6 +113,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
   render: function() {
     var rendered = this.template( {loop: this.model} );
     this.$el.html(rendered);
+    this.updateUIColor(this.model.get('color'));
     this.attachSubviews();
     return this;
   }

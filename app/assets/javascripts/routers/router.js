@@ -33,6 +33,7 @@ Dianthus.Routers.Router = Backbone.Router.extend({
   _swapView: function(newView) {
     if (this.currentView) this.currentView.remove();
     this.$el.html(newView.render().$el);
+    if (newView.swapViewHandler) newView.swapViewHandler();
     this.currentView = newView;
   }
 

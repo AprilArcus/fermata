@@ -56,7 +56,7 @@ body,
 }
 
 #Dianthus-Views-LoopCompose-Target {
-  padding: $panel-body-padding;
+  padding: 0 $panel-body-padding;
 
   -webkit-flex-grow: 1;
   flex-grow: 1;
@@ -123,6 +123,14 @@ body,
   border-radius: $border-radius-base * 2;
 }
 
+.note:first-child {
+  margin-top: $panel-body-padding;
+}
+
+.note:last-child {
+  margin-bottom: $panel-body-padding;
+}
+
 @media screen and (max-width: 767px) {
   .note {
     padding: 1px;
@@ -187,6 +195,10 @@ body,
     float: right; /* even on small devices */
   }
 
+  .form-group {
+    margin-bottom: 0;
+  }
+
 }
 
 #Dianthus-Views-LoopComposeForm-Options {
@@ -195,13 +207,56 @@ body,
 
 #Dianthus-Views-LoopComposeForm-Submit {
   border-bottom: none;
+
+  .alert {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .alert > .form-group {
+    display: inline-block;
+  }
+
+  .alert-message {
+    display: none;
+    padding-left: $alert-padding;
+    padding-right: $alert-padding;
+  }
+
 }
 
-@media screen and (max-width: 480px) {
+#mode-select {
+  display: none;
+}
+
+#play-pause #pause {
+  display: none;
+}
+
+#play-pause.active #pause {
+  display: inline;
+}
+
+#play-pause.active #play {
+  display: none;
+}
+
+input:checked {
+  height: 500px !important;
+  display: none;
+}
+
+@media screen and (max-width: 640px) {
   #mode-radio {
     display: none;
   }
+  #mode-select {
+    display: inline-block;
+  }
+}
 
+@media screen and (max-width: 480px) {
   /* copied straight out of the bootstrap source, horribly, because
      SASS won't let us @extend inside an @media query
      c.f. http://www.sitepoint.com/cross-media-query-extend-sass/ */
@@ -242,7 +297,7 @@ body,
 }
 
 @media screen and (min-width: 481px) {
-  #mode-select {
-    display: none;
+  #Dianthus-Views-LoopComposeForm-Submit .alert-danger > .alert-message {
+    display: inline;
   }
 }

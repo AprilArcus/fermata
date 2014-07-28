@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725164029) do
+ActiveRecord::Schema.define(version: 20140728222440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,30 @@ ActiveRecord::Schema.define(version: 20140725164029) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title",       null: false
+    t.string   "key",         null: false
+    t.string   "mode",        null: false
+    t.integer  "instrument",  null: false
+    t.string   "color",       null: false
   end
 
   add_index "loops", ["author_id"], name: "index_loops_on_author_id", using: :btree
+
+  create_table "measure_loops", force: true do |t|
+    t.integer  "measure_id", null: false
+    t.integer  "loop_id",    null: false
+    t.integer  "instrument", null: false
+    t.integer  "ord",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "measures", force: true do |t|
+    t.integer  "verse_id",     null: false
+    t.integer  "ord",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "scale_degree", null: false
+  end
 
   create_table "users", force: true do |t|
     t.string   "password_digest", null: false
@@ -36,5 +57,16 @@ ActiveRecord::Schema.define(version: 20140725164029) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
+
+  create_table "verses", force: true do |t|
+    t.integer  "author_id",  null: false
+    t.string   "title",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "key",        null: false
+    t.string   "mode",       null: false
+  end
+
+  add_index "verses", ["author_id"], name: "index_verses_on_author_id", using: :btree
 
 end

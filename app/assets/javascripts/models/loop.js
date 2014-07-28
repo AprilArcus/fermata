@@ -8,7 +8,11 @@ Dianthus.Models.Loop = Backbone.Model.extend({
   },
 
   defaults: function() {
-    return {time_slices: this.emptyLoop()};
+    return {time_slices: this.emptyLoop(),
+            key: 'C',
+            mode: 'MAJOR',
+            instrument: 0,
+            color: '#f8f8f8'};
   },
 
   toJSON: function() {

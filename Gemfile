@@ -21,7 +21,7 @@ group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
 
-group :deveopment do
+group :development do
   # gem 'debugger'
   gem 'better_errors'
   gem 'binding_of_caller'

@@ -2,6 +2,8 @@ Dianthus.Views.LoopsIndex = Backbone.CompositeView.extend({
 
   template: JST['loop/index'],
 
+  className: 'Dianthus-Views-LoopIndex',
+
   initialize: function (options) {
     this.authorId = options.authorId;
     var _this = this;

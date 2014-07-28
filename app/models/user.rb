@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   validates :session_token, presence: true, uniqueness: true
 
   has_many :loops, foreign_key: 'author_id'
+  has_many :verses, foreign_key: 'author_id'
 
   def gravatar_url
     "http://www.gravatar.com/avatar/#{ Digest::MD5.hexdigest(email) }"

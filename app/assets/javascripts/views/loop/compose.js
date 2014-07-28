@@ -1,15 +1,12 @@
 Dianthus.Views.LoopCompose = Backbone.View.extend({
 
   initialize: function() {
-    this.bpm = 120;
-    this.paused = false;
-    this.key = MIDI.keyToNote.C4;
-    this.mode = Dianthus.MAJOR;
-
-    this.timeIndex = 0;
-    this.NUM_TIME_SLICES = 16;
-
+    this.key = MIDI.keyToNote[this.model.get('key') + '4'];
+    this.mode = Dianthus.Modes[this.model.get('mode')];
     this.timeSlices = this.model.get('time_slices');
+    this.bpm = 120;
+    this.timeIndex = 0;
+    this.playing = true;
   },
 
   id: 'Dianthus-Views-LoopCompose',
@@ -63,15 +60,22 @@ Dianthus.Views.LoopCompose = Backbone.View.extend({
     
     // advance the playhead
     this.timeIndex += 1;
-    this.timeIndex %= this.NUM_TIME_SLICES;
+    this.timeIndex %= this.timeSlices.length;
   },
 
-  interval: function() {
+  semiquaver: function() {
     return 15000 / this.bpm;
   },
 
   play: function() {
-    setInterval(this.playOneTimeSlice.bind(this), this.interval());
+    this.interval = setInterval(this.playOneTimeSlice.bind(this),
+                                this.semiquaver());
+    this.playing = true;
+  },
+
+  pause: function() {
+    clearInterval(this.interval);
+    this.playing = false;
   },
 
   render: function() {

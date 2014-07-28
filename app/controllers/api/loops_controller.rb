@@ -15,7 +15,7 @@ module Api
       if loop.update_attributes(loop_params)
         render json: loop
       else
-        render json: loop.errors, status: :unprocessable_entity
+        render json: loop.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -27,7 +27,12 @@ module Api
 
     private
     def loop_params
-      params.require(:loop).permit(:title, :color, :time_slices)
+      params.require(:loop).permit(:title,
+                                   :color,
+                                   :time_slices,
+                                   :key,
+                                   :mode,
+                                   :instrument)
     end
 
   end

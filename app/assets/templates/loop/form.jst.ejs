@@ -22,73 +22,74 @@
         <div id="key-radio"
              class="btn-group hidden-xs hidden-sm"
              data-toggle="buttons">
+          <label class="btn btn-default">
+            <input type="radio"
+                   name="key"
+                   value="F">F
+          </label>
           <label class="btn btn-default active">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="C"
                    checked>C
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="G">G
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="D">D
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="A">A
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="E">E
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="B">B
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="Gb">G♭
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="Db">D♭
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="Ab">A♭
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="Eb">E♭
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[key]"
+                   name="key"
                    value="Bb">B♭
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="loop[key]"
-                   value="F">F
           </label>
         </div> <!-- /.button-group -->
         <select id="key-select"
-                name=loop[key]
+                name=key
                 class="form-control
                        visible-xs-inline-block
                        visible-sm-inline-block">
+          <option value="F">F</option>
           <option value="C" selected="selected">C</option>
           <option value="G">G</option>
           <option value="D">D</option>
@@ -100,7 +101,6 @@
           <option value="Ab">A♭</option>
           <option value="Eb">E♭</option>
           <option value="Bb">B♭</option>
-          <option value="F">F</option>
         </select>
       </div> <!-- /.form-group -->
       <div class="form-group">
@@ -109,18 +109,18 @@
              data-toggle="buttons">
           <label class="btn btn-default active">
             <input type="radio"
-                   name="loop[mode]"
+                   name="mode"
                    value="MAJOR"
                    checked="checked">Major
           </label>
           <label class="btn btn-default">
             <input type="radio"
-                   name="loop[mode]"
+                   name="mode"
                    value="MINOR">Minor
           </label>
         </div>
         <select id="mode-select"
-                name="loop[mode]"
+                name="mode"
                 class="form-control" >
           <option value="MAJOR" selected="selected">Major</option>
           <option value="MINOR">Minor</option>
@@ -130,7 +130,7 @@
         <label class="control-label hidden-xs hidden-sm hidden-md">
           on the
         </label>
-        <select id="instrument" class="form-control">
+        <select id="instrument" name="instrument" class="form-control">
           <option selected="selected">Acoustic Grand Piano</option>
           <option>Synth Drums</option>
         </select>
@@ -139,7 +139,7 @@
 
     <form class="navbar-form navbar-right">
       <div class="form-group navbar-right">
-        <label class="control-label">Guest</label>
+        <label class="control-label hidden-xs">Guest</label>
         <label class="sr-only"
              for="title">
         Sign Out
@@ -167,23 +167,25 @@
           Color
         </label>
         <input type="color"
-               name="loop[color]"
+               name="color"
                class="form-control"
+               value="<%= loop.escape('color') %>"
                id="color"> <!-- TODO polyfill available:
                                 http://bgrins.github.io/spectrum/ -->
       </div> <!-- /.form-group -->
-      <div class="alert alert-danger">This loop needs a title!
-      <div class="form-group">
-        <label class="sr-only"
-             for="title">
-        Title
-        </label>
-        <input type="text"
-               name="loop[title]"
-               class="form-control"
-               id="title"
-               placeholder="Untitled">
-      </div> <!-- /.form-group -->
+      <div class="alert alert-title">
+        <span class="alert-message"></span>
+        <div class="form-group">
+          <label class="sr-only"
+               for="title">
+          Title
+          </label>
+          <input type="text"
+                 name="title"
+                 class="form-control"
+                 id="title"
+                 placeholder="Untitled">
+        </div> <!-- /.form-group -->
       </div>
       <div class="form-group">
         <button type="submit"

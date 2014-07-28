@@ -22,8 +22,22 @@ window.Dianthus = {
 
 // Constants
 Dianthus.SOLFEGE = ['do', 're', 'mi', 'fa', 'so', 'la', 'ti'];
-Dianthus.MAJOR = [0, 2, 4, 5, 7, 9, 11];
-Dianthus.MINOR = [0, 2, 3, 5, 7, 8, 10];
+Dianthus.Modes = {};
+// Major
+Dianthus.Modes.LYDIAN                         = [0, 2, 4, 6, 7, 9, 11];
+Dianthus.Modes.IONIAN  = Dianthus.Modes.MAJOR = [0, 2, 4, 5, 7, 9, 11];
+Dianthus.Modes.MIXOLYDIAN                     = [0, 2, 4, 5, 7, 9, 10];
+// Minor
+Dianthus.Modes.DORIAN                         = [0, 2, 3, 5, 7, 9, 10];
+Dianthus.Modes.AEOLIAN = Dianthus.Modes.MINOR = [0, 2, 3, 5, 7, 8, 10];
+Dianthus.Modes.HARMONIC_MINOR                 = [0, 2, 3, 5, 7, 8, 11];
+// "something that I'd learned at Juilliard" -- Miles Davis
+Dianthus.Modes.EGYPTIAN                       = [0, 2, 3, 6, 7, 8, 11];
+Dianthus.Modes.PHRYGIAN                       = [0, 1, 3, 5, 7, 8, 10];
+// "The Locrian mode is traditionally considered theoretical rather than
+//  practical because the triad built on the first scale degree is
+//  diminished -- http://en.wikipedia.org/wiki/Musical_mode#Summary"
+Dianthus.Modes.LOCRIAN                        = [0, 1, 3, 5, 6, 8, 10];
 
 //Utility functions
 Dianthus.transpose = function(noteIndex, key, mode) {

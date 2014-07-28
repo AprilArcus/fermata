@@ -1,4 +1,11 @@
-<%= loop.escape('title') %>
-<% if (loop.get('author_id') === Dianthus.currentUser.id) { %>
-<button class="destroy">Delete</button>
-<% } %>
+<div class="btn-group">
+  <button type="button" class="btn btn-default">
+    <span class="destroy glyphicon glyphicon-remove"></span>
+  </button>
+  <button type="button" class="btn btn-default">
+    <%= loop.escape('title') %>
+  </button>
+  <button type="button" class="btn btn-default">
+    <span class="edit glyphicon glyphicon-pencil"></span>
+  </button>
+</div>
