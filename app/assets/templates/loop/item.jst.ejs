@@ -1,11 +1,16 @@
 <div class="btn-group">
-  <button type="button" class="btn btn-default">
-    <span class="destroy glyphicon glyphicon-remove"></span>
+  <button type="button"
+          class="btn btn-default"
+          style="background-color: <%= loop.escape('color') %>">
+    <span class="destroy glyphicon glyphicon-trash"></span>
   </button>
-  <button type="button" class="btn btn-default">
+  <button type="button"
+          class="btn btn-default"
+          style="background-color: <%= loop.escape('color') %>">
     <%= loop.escape('title') %>
   </button>
-  <button type="button" class="btn btn-default">
+  <button type="button"
+          class="btn btn-default">
     <span class="edit glyphicon glyphicon-pencil"></span>
   </button>
 </div>

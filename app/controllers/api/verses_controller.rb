@@ -31,7 +31,7 @@ module Api
 
     def destroy
       verse = current_user.verses.find(params[:id])
-      verse.try(:destroy) #maybe verse.destroy! ?
+      verse.try(:destroy)
       render json: verse
     end
 

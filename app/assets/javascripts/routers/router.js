@@ -6,7 +6,8 @@ Dianthus.Routers.Router = Backbone.Router.extend({
   routes: {
     '': 'currentUserShow',
     'loops/new': 'loopCreate',
-    'loops/:id/edit': 'loopUpdate'
+    'loops/:id/edit': 'loopUpdate',
+    'measures/:id/edit': 'measureUpdate' //development
   },
 
   currentUserShow: function() {
@@ -28,6 +29,18 @@ Dianthus.Routers.Router = Backbone.Router.extend({
       model: Dianthus.currentUser.loops().getOrFetch(id)
     });
     this._swapView(loopComposeView);
+  },
+
+  // development
+  measureUpdate: function(id) {
+    var measure = new Dianthus.Models.Measure({id: id});
+    var _this = this;
+    measure.fetch({success: function() {
+      var measureFormView = new Dianthus.Views.MeasureForm({ model: measure });
+      _this._swapView(measureFormView);
+      }
+    });
+    
   },
 
   _swapView: function(newView) {

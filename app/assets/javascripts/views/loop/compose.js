@@ -105,5 +105,10 @@ Dianthus.Views.LoopCompose = Backbone.View.extend({
     this.play();
 
     return this;
+  },
+
+  remove: function() {
+    this.pause();
+    Backbone.View.prototype.remove.call(this);
   }
 });

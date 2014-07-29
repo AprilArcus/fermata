@@ -1,8 +1,17 @@
 module Api
   class MeasuresController < ApiController
 
+    def show
+      @measure = current_user.measures.find(params[:id])
+      if @measure
+        render :show
+      else
+        render json: {}, status: :not_found
+      end
+    end
+
     def update
-      measure = Measure.find(params[:id])
+      measure = current_user.measures.find(params[:id])
       if measure.update_attributes(measure_params)
         render json: measure
       else
@@ -12,7 +21,7 @@ module Api
     end
 
     private
-    def verse_params
+    def measure_params
       params.require(:measure).permit(:scale_degree)
     end
 

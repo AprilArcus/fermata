@@ -15,8 +15,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
            'change #color': 'updateColor',
            'focus #title': 'highlightSave',
            'blur #title': 'dimSave',
-           'submit form': 'submit',
-           
+           'submit form': 'submit'
   },
 
   playPause: function(event) {

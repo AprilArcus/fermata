@@ -1,0 +1,14 @@
+<% var chordSymbols = Dianthus.ChordSymbols[mode] %>
+
+<select class="scale-degree form-control">
+  <% _(chordSymbols).each(function(symbol, index) { %>
+    <option value="<%= index %>"
+            <% if (measure.get('scale_degree') === index) { %>
+            selected
+            <% } %>>
+      <%= symbol %>
+    </option>  
+  <% }) %>
+</select>
+
+<ul class="measure-loops-list"></ul>

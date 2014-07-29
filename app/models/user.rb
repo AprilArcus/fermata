@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
 
   has_many :loops, foreign_key: 'author_id', dependent: :destroy
   has_many :verses, foreign_key: 'author_id', dependent: :destroy
+  has_many :measures, through: :verses
+  has_many :measure_loops, through: :measures
 
   def gravatar_url
     "http://www.gravatar.com/avatar/#{ Digest::MD5.hexdigest(email) }"

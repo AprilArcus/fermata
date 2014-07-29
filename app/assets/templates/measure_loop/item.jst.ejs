@@ -1,0 +1,23 @@
+<button type="button"
+        class="btn btn-default destroy"
+        style="background-color: <%= measure_loop.loop.escape('color') %>">
+  <span class="glyphicon glyphicon-remove"></span>
+</button>
+<div class="btn btn-default measure-loop-title"
+     style="background-color: <%= measure_loop.loop.escape('color') %>">
+  <%= measure_loop.loop.escape('title') %>
+</div>
+<div class="btn-group">
+  <button type="button"
+          class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          style="background-color: <%= measure_loop.loop.escape('color') %>">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" 
+      role="menu"
+      style="background-color: <%= measure_loop.loop.escape('color') %>">
+    <li><a>Acoustic Grand Piano</a></li>
+    <li><a>Synth Drums</a></li>
+  </ul>
+</div>

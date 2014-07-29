@@ -81,9 +81,6 @@ body,
 #Dianthus-Views-LoopCompose {
   display: -webkit-flex;
   display: flex;
-
-  flex-direction: row;
-  -webkit-flex-direction: row;
 }
 
 .time-slice {
@@ -300,4 +297,39 @@ input:checked {
   #Dianthus-Views-LoopComposeForm-Submit .alert-danger > .alert-message {
     display: inline;
   }
+}
+
+.measure-loops-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.measure-loop {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.measure-loop-title {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+
+/* .measure-loop-title is a div.btn.btn-default whose click behaviors
+   we override to create a large, not-clicky drag target */
+.measure-loop-title:active {
+  box-shadow: none;
+}
+
+.measure-loop-title:hover, .measure-loop-title:focus {
+  border-color: $btn-default-border;
+}
+
+.measure-loop .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+.measure-loop .dropdown-menu a:hover {
+  background-color: rgba(127, 127, 127, 0.5); /* brittle - will fail on
+                                                 gray menus */
 }

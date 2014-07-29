@@ -39,6 +39,15 @@ Dianthus.Modes.PHRYGIAN                       = [0, 1, 3, 5, 7, 8, 10];
 //  diminished -- http://en.wikipedia.org/wiki/Musical_mode#Summary"
 Dianthus.Modes.LOCRIAN                        = [0, 1, 3, 5, 6, 8, 10];
 
+Dianthus.ChordSymbols = {};
+Dianthus.ChordSymbols.IONIAN =
+Dianthus.ChordSymbols.MAJOR  =
+['I Maj', 'II min', 'III min', 'IV Maj', 'V Maj', 'VI min', 'VII dim'];
+
+Dianthus.ChordSymbols.AEOLIAN =
+Dianthus.ChordSymbols.MINOR =
+['I min', 'II dim', '♭III Maj', 'IV min', 'V min', '♭VI Maj', '♭VII dim'];
+
 //Utility functions
 Dianthus.transpose = function(noteIndex, key, mode) {
   var noteType = noteIndex % 7;
