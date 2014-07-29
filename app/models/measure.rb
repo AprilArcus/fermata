@@ -13,16 +13,17 @@
 class Measure < ActiveRecord::Base
 
   validates :verse, :ord, :scale_degree, presence: true
-  validate :maxMeasuresPerVerse
+  validate :max_measures_per_verse
+  validate :no_duplicates
 
   belongs_to :verse
-  has_many :measure_loops
+  has_many :measure_loops, dependent: :destroy
 
-  def maxMeasuresPerVerse
+  def max_measures_per_verse
     verse.measures.count <= 4
   end
 
-  def noDuplicates
+  def no_duplicates
     ords = verse.measures.pluck(:ord)
     ords.uniq.length == ords.length
   end

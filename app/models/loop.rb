@@ -19,6 +19,6 @@ class Loop < ActiveRecord::Base
   validates :author_id, :time_slices, presence: true
 
   belongs_to :author, class_name: 'User'
-  has_many :measure_loops
+  has_many :measure_loops, dependent: :destroy
 
 end

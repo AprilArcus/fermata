@@ -12,7 +12,8 @@ Dianthus.Models.Loop = Backbone.Model.extend({
             key: 'C',
             mode: 'MAJOR',
             instrument: 0,
-            color: '#f8f8f8'};
+            color: '#f8f8f8'}; // TODO: fetch default bgcolor from bootstrap
+                               // theme variable.
   },
 
   toJSON: function() {
