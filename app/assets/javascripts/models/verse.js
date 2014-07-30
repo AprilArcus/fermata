@@ -17,13 +17,9 @@ Dianthus.Models.Verse = Backbone.Model.extend({
   },
 
   parse: function(response) {
-    // this.set('measures', response.measures, { parse: true });
-    // delete response.loops;
-    // if (response.loops) {
-    //   this.loops().set(response.loops, { parse: true });
-    //   delete response.loops;
-    // }
-    // return response;
+    this.measures = new Dianthus.Collections.Measures(response.measures, {parse: true});
+    delete response.measures;
+    return response;
   }
 
 });

@@ -299,7 +299,7 @@ input:checked {
   }
 }
 
-.measure-loops-list {
+.measures-list, .measure-loops-list {
   list-style: none;
   padding-left: 0;
 }
@@ -307,11 +307,23 @@ input:checked {
 .measure-loop {
   display: -webkit-flex;
   display: flex;
+/*  -webkit-justify-content: space-between;
+  justify-content: space-between;*/
+}
+
+.measure-loop > * {
+  flex-shrink: 0;
 }
 
 .measure-loop-title {
   -webkit-flex-grow: 1;
   flex-grow: 1;
+  -webkit-flex-basis: 0;
+  flex-basis: 0;
+/*  -webkit-flex-shrink: 1;
+  flex-shrink: 1;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* .measure-loop-title is a div.btn.btn-default whose click behaviors
@@ -332,4 +344,20 @@ input:checked {
 .measure-loop .dropdown-menu a:hover {
   background-color: rgba(127, 127, 127, 0.5); /* brittle - will fail on
                                                  gray menus */
+}
+
+
+.measures-list, {
+  display: -webkit-flex;
+  display: flex;
+
+  /*-webkit-justify-content: space-between;
+  justify-content: space-between;*/
+}
+
+.measure {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-basis: 0;
+  flex-basis: 0;
 }
