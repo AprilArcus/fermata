@@ -314,6 +314,8 @@ input:checked {
 
   -webkit-flex-basis: 0;
   flex-basis: 0;
+
+  margin-right: $grid-gutter-width/2;
 }
 
 select.scale-degree {
@@ -350,7 +352,7 @@ select.scale-degree {
   }
 }
 
-.measure-loop > * {
+.loop, .measure-loop > * {
   flex-shrink: 0;
 }
 
@@ -361,6 +363,13 @@ select.scale-degree {
   flex-basis: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.loop-title {
+  cursor: default;
+}
+
+.measure-loop-title {
   cursor: move;
   cursor: -moz-grab;
   cursor: -webkit-grab;
@@ -404,15 +413,11 @@ select.scale-degree {
   -webkit-flex-direction: column;
   flex-direction: column;
 
-  margin: 0 $grid-gutter-width/4;
-}
-
-#measures-list > li:first-child {
-  margin-left: $grid-gutter-width * (5/12); /* five columns, six gutters */
+  margin-left: $grid-gutter-width/2;
 }
 
 #measures-list > li:last-child {
-  margin-right: $grid-gutter-width/2;
+  margin-right: 0;
 }
 
 
@@ -431,9 +436,6 @@ select.scale-degree {
   flex-grow: 1;
   -webkit-flex-basis: 0;
   flex-basis: 0;
-
-  margin-left: $grid-gutter-width/2;
-  margin-right: $grid-gutter-width * (1/12); /* five columns, six gutters */
 }
 
 .loop-index .panel-heading {
@@ -441,6 +443,10 @@ select.scale-degree {
                    most cluttery element in stock bootstrap */
   height: $input-height-base*2 + $padding-base-vertical*2;
   position: relative;
+}
+
+.loop-index {
+  margin-left: $grid-gutter-width/2;
 }
 
 
