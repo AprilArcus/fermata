@@ -1,4 +1,9 @@
-<ul></ul>
-<% if (loops.authorId = Dianthus.currentUser.id) { %>
-<button class="new">New</button>
-<% } %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <img class="gravatar" src="<%= author.escape('gravatar_url') %>">
+    <h3 class="panel-title">
+      <%= author.handle() %>'s loops
+    </h3>
+  </div>
+  <ul class="loops-list"></ul>
+</div>

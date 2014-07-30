@@ -58,9 +58,6 @@ Dianthus.Views.MeasureForm = Backbone.CompositeView.extend({
   render: function() {
     var rendered = this.template( {measure: this.model, mode: this.mode} );
     this.$el.html(rendered);
-    // var $measureLoopsList = this.$el.find('.measure-loops-list');
-    // $measureLoopsList.sortable({ handle: '.measure-loop-title' });
-
     this.attachSubviews();
     return this;
   }

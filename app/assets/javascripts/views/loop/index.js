@@ -2,10 +2,12 @@ Dianthus.Views.LoopsIndex = Backbone.CompositeView.extend({
 
   template: JST['loop/index'],
 
-  className: 'Dianthus-Views-LoopIndex',
+  tagName: 'li',
+
+  className: 'loop-index',
 
   initialize: function (options) {
-    this.authorId = options.authorId;
+    this.author = options.author;
     var _this = this;
     this.collection.each (function(loop) {
       _this.addLoop(loop);
@@ -14,7 +16,7 @@ Dianthus.Views.LoopsIndex = Backbone.CompositeView.extend({
   },
 
   addLoop: function(loop) {
-    var selector = 'ul';
+    var selector = '.loops-list';
     var view = new Dianthus.Views.LoopItem( {model: loop} );
     this.addSubview(selector, view);
     this.listenTo(view, 'remove', this.removeSubview.bind(selector, this));
@@ -27,7 +29,8 @@ Dianthus.Views.LoopsIndex = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    var rendered = this.template( {loops: this.collection} );
+    var rendered = this.template( {loops: this.collection,
+                                   author: this.author} );
     this.$el.html(rendered);
     this.attachSubviews();
     return this;

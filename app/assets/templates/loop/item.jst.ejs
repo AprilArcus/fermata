@@ -1,16 +1,14 @@
-<div class="btn-group">
-  <button type="button"
-          class="btn btn-default"
-          style="background-color: <%= loop.escape('color') %>">
-    <span class="destroy glyphicon glyphicon-trash"></span>
-  </button>
-  <button type="button"
-          class="btn btn-default"
-          style="background-color: <%= loop.escape('color') %>">
-    <%= loop.escape('title') %>
-  </button>
-  <button type="button"
-          class="btn btn-default">
-    <span class="edit glyphicon glyphicon-pencil"></span>
-  </button>
+<button type="button"
+        class="btn btn-default destroy"
+        style="background-color: <%= loop.escape('color') %>">
+  <span class="glyphicon glyphicon-trash"></span>
+</button>
+<div class="btn btn-default measure-loop-title"
+     style="background-color: <%= loop.escape('color') %>">
+  <%= loop.escape('title') %>
 </div>
+<button type="button"
+        class="btn btn-default edit"
+        style="background-color: <%= loop.escape('color') %>">
+  <span class="glyphicon glyphicon-pencil"></span>
+</button>

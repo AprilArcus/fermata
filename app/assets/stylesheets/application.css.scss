@@ -43,7 +43,8 @@ input[type="color"] {
 html,
 body,
 #Dianthus-Routers-SwapView-Target,
-#Dianthus-Views-LoopComposeForm {
+#Dianthus-Views-LoopComposeForm,
+#Dianthus-Views-VerseForm {
   height: 100%;
 }
 
@@ -55,9 +56,13 @@ body,
   -webkit-flex-direction: column;
 }
 
-#Dianthus-Views-LoopCompose-Target {
-  padding: 0 $panel-body-padding;
+#Dianthus-Views-LoopCompose-Target, #Dianthus-Views-VerseForm {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 
+#Dianthus-Views-LoopCompose-Target {
   -webkit-flex-grow: 1;
   flex-grow: 1;
 
@@ -67,9 +72,8 @@ body,
   flex-direction: column;
   -webkit-flex-direction: column;
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  margin-left: $grid-gutter-width/2;
+  margin-right: $grid-gutter-width/2;
 }
 
 #Dianthus-Views-LoopCompose,
@@ -275,7 +279,7 @@ input:checked {
     padding: $padding-small-vertical $padding-small-horizontal;
     font-size: $font-size-small;
     line-height: $line-height-small;
-    border-radius: $border-radius-small;    
+    border-radius: $border-radius-small;
   }
   select.form-control {
     line-height: $input-height-small;
@@ -299,41 +303,77 @@ input:checked {
   }
 }
 
-.measures-list, .measure-loops-list {
+.loops-list, #measures-list, .measure-loops-list, #users-list {
   list-style: none;
   padding-left: 0;
 }
 
-.measure-loop {
+#measures-list {
+  -webkit-flex-grow: 4;
+  flex-grow: 4;
+
+  -webkit-flex-basis: 0;
+  flex-basis: 0;
+}
+
+select.scale-degree {
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+
+.measure-loops-list {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+
+.loop, .measure-loop, .measure-loop-placeholder {
   display: -webkit-flex;
   display: flex;
-/*  -webkit-justify-content: space-between;
-  justify-content: space-between;*/
+  margin: $padding-base-vertical*2 0;
+}
+
+.measure-loop-placeholder {
+  border: 3px dashed #999;
+  height: $input-height-base;
+  border-radius: $border-radius-base;  
+}
+
+@media screen and (max-width: 480px) {
+  .measure-loop, .measure-loop-placeholder {
+    margin: $padding-small-vertical*2 0;
+  }
+
+  .measure-loop-placeholder {
+    border-width: 2px;
+    height: $input-height-small;
+    border-radius: $border-radius-small;
+  }
 }
 
 .measure-loop > * {
   flex-shrink: 0;
 }
 
-.measure-loop-title {
+.loop-title, .measure-loop-title {
   -webkit-flex-grow: 1;
   flex-grow: 1;
   -webkit-flex-basis: 0;
   flex-basis: 0;
-/*  -webkit-flex-shrink: 1;
-  flex-shrink: 1;*/
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: move;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  cursor: grab;
 }
 
 /* .measure-loop-title is a div.btn.btn-default whose click behaviors
    we override to create a large, not-clicky drag target */
-.measure-loop-title:active {
-  box-shadow: none;
-}
-
-.measure-loop-title:hover, .measure-loop-title:focus {
+.loop-title:active, .measure-loop-title:active,
+.loop-title:hover,  .measure-loop-title:hover,
+.loop-title:focus,  .measure-loop-title:focus {
   border-color: $btn-default-border;
+  box-shadow: none;
 }
 
 .measure-loop .dropdown-menu {
@@ -347,12 +387,10 @@ input:checked {
 }
 
 
-.measures-list, {
+#measures-list, Dianthus-Views-LoopCompose-Target {
   display: -webkit-flex;
   display: flex;
-
-  /*-webkit-justify-content: space-between;
-  justify-content: space-between;*/
+  margin-bottom: 0;
 }
 
 .measure {
@@ -360,4 +398,69 @@ input:checked {
   flex-grow: 1;
   -webkit-flex-basis: 0;
   flex-basis: 0;
+
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+
+  margin: 0 $grid-gutter-width/4;
+}
+
+#measures-list > li:first-child {
+  margin-left: $grid-gutter-width * (5/12); /* five columns, six gutters */
+}
+
+#measures-list > li:last-child {
+  margin-right: $grid-gutter-width/2;
+}
+
+
+
+
+
+
+
+#Dianthus-Views-VerseForm {
+  display: -webkit-flex;
+  display: flex;
+}
+
+#users-list {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-basis: 0;
+  flex-basis: 0;
+
+  margin-left: $grid-gutter-width/2;
+  margin-right: $grid-gutter-width * (1/12); /* five columns, six gutters */
+}
+
+.loop-index .panel-heading {
+  border: none; /* flatly/darkly does this, and wisely - it is like the
+                   most cluttery element in stock bootstrap */
+  height: $input-height-base*2 + $padding-base-vertical*2;
+  position: relative;
+}
+
+
+@media screen and (max-width: 480px) {
+  .loop-index .panel-heading {
+    height: $input-height-small*2 + $padding-small-vertical*2;
+    border-radius: $border-radius-small;
+  }
+}
+
+.gravatar {
+  height: 100%;
+  float: left;
+  padding-right: 15px;
+}
+
+.loop-index .panel-title {
+  display: inline;
+  font-size: ceil(($font-size-base * 2.3));
+  font-family: 'Proxima Nova';
+  position: absolute;
+  bottom: 4px;
 }
