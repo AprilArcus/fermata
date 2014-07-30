@@ -308,6 +308,10 @@ input:checked {
   padding-left: 0;
 }
 
+.loops-list {
+  position: relative; /* allow the ui-draggable proxy to inherit our width */
+}
+
 #measures-list {
   -webkit-flex-grow: 4;
   flex-grow: 4;
@@ -332,6 +336,8 @@ select.scale-degree {
   display: -webkit-flex;
   display: flex;
   margin: $padding-base-vertical*2 0;
+  width: 100%; /* unnecessary but harmless for flexbox; but helps our
+                  ui-draggable proxy maintain a consistent look and feel */
 }
 
 .measure-loop-placeholder {
@@ -374,6 +380,11 @@ select.scale-degree {
   cursor: -moz-grab;
   cursor: -webkit-grab;
   cursor: grab;
+}
+
+.ui-draggable-dragging .loop-title,
+.ui-sortable-helper .measure-loop-title {
+  cursor: inherit !important;
 }
 
 /* .measure-loop-title is a div.btn.btn-default whose click behaviors
