@@ -83,9 +83,10 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
 
     var $loops = this.$el.find('.loop');
     $loops.draggable({ 
-                       cursor: 'alias',
+                       cursor: 'no-drop',
                        connectToSortable: '.measure-loops-list',
                        // handle: '.loop-title',
+                       revert: 150,
                        helper: 'clone',
                      });
                       

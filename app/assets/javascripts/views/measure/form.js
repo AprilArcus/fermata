@@ -24,7 +24,7 @@ Dianthus.Views.MeasureForm = Backbone.CompositeView.extend({
   events: {
     'change .scale-degree' : 'updateScaleDegree',
     'sortupdate .measure-loops-list': 'updateOrds',
-    'sortout .measure-loops-list': 'cleanUpCollection'
+    'sortremove .measure-loops-list': 'cleanUpCollection'
   },
 
   updateScaleDegree: function(event) {

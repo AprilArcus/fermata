@@ -369,6 +369,7 @@ select.scale-degree {
   flex-basis: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  z-index: inherit !important;
 }
 
 .loop-title {
