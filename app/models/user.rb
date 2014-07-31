@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :measure_loops, through: :measures
 
   def gravatar_url
-    "http://www.gravatar.com/avatar/#{ Digest::MD5.hexdigest(email) }"
+    "http://www.gravatar.com/avatar/#{ Digest::MD5.hexdigest(email) }?s=360"
   end
 
   def password

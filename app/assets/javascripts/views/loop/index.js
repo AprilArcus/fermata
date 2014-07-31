@@ -22,7 +22,7 @@ Dianthus.Views.LoopsIndex = Backbone.CompositeView.extend({
     this.listenTo(view, 'remove', this.removeSubview.bind(selector, this));
   },
 
-  events: { 'click .new': 'new' },
+  events: { 'click #new-loop': 'new' },
 
   new: function() {
     Backbone.history.navigate('#/loops/new');
@@ -33,6 +33,11 @@ Dianthus.Views.LoopsIndex = Backbone.CompositeView.extend({
                                    author: this.author} );
     this.$el.html(rendered);
     this.attachSubviews();
+    if (this.author === Dianthus.currentUser) {
+      console.log(this.$('.loops-list').append(
+        '<li><button class="btn btn-default" id="new-loop">New</button></li>'
+      ));
+    }
     return this;
   }
 

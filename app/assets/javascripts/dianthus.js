@@ -55,3 +55,15 @@ Dianthus.transpose = function(noteIndex, key, mode) {
   var modulatedNote = mode[noteType] + octave*12; // tonic is now 12
   return modulatedNote - 12 + key;
 };
+
+Dianthus.getForegroundColor = function(color) {
+ // calculate appropriate foreground color
+ // h/t Gacek, http://stackoverflow.com/a/1855903
+    var red   = parseInt(color.slice(-6, -4), 16);
+    var green = parseInt(color.slice(-4, -2), 16);
+    var blue  = parseInt(color.slice(-2), 16);
+    var perceptiveLuminance = 1 - (0.299 * red +
+                                   0.587 * green +
+                                   0.114 * blue) / 255;
+    return (perceptiveLuminance < 0.5) ? 'black' : 'white';
+};

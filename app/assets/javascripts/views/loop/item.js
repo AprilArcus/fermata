@@ -9,7 +9,8 @@ Dianthus.Views.LoopItem = Backbone.View.extend({
     return {'data-loop-id': this.model.id};
   },
 
-  events: { 'click .destroy': 'destroy' },
+  events: { 'click .destroy': 'destroy',
+            'click .edit': 'edit' },
 
   destroy: function() {
     var _this = this;
@@ -17,6 +18,10 @@ Dianthus.Views.LoopItem = Backbone.View.extend({
         _this.trigger('remove', _this);
       }
     });
+  },
+
+  edit: function() {
+    Backbone.history.navigate('#/loops/'+this.model.id+'/edit');
   },
 
   render: function() {

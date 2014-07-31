@@ -85,7 +85,7 @@
           </label>
         </div> <!-- /.button-group -->
         <select id="key-select"
-                name=key
+                name="key"
                 class="form-control
                        visible-xs-inline-block
                        visible-sm-inline-block">
@@ -139,11 +139,8 @@
 
     <form class="navbar-form navbar-right">
       <div class="form-group navbar-right">
-        <label class="control-label hidden-xs">Guest</label>
-        <label class="sr-only"
-             for="title">
-        Sign Out
-        </label>
+        <!-- <label class="control-label hidden-xs">Guest</label> -->
+        <label class="sr-only" for="title">Sign Out</label>
         <button type="button"
                 id="sign-out"
                 class="btn btn-default">
@@ -184,6 +181,9 @@
                  name="title"
                  class="form-control"
                  id="title"
+                 <% if (!loop.isNew()) { %>
+                 value="<%= loop.escape('title') %>"
+                 <% } %>
                  placeholder="Untitled">
         </div> <!-- /.form-group -->
       </div>

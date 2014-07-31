@@ -32,6 +32,17 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
     });
   },
 
+  drawPlayhead: function() {
+    var playhead = document.createElement('div');
+    playhead.id = 'playhead';
+    _(64).times(function(timeIndex) {
+      var gridCol = document.createElement('div');
+      gridCol.classList.add('time-slice');
+      playhead.appendChild(gridCol);
+    });
+    return playhead;
+  },
+
   render: function() {
     var rendered = this.template( {verse: this.model} );
     this.$el.html(rendered);
@@ -95,7 +106,7 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
 ////////////////////////////////////////////////////////////////////////
 //                                                                    //
 //  After draggable hands off to sortable and sortable completes,     //
-//  sortable will try to restore sortable's cursor (in this case,     //
+//  sortable will try to restore draggable's cursor (in this case,    //
 //  no-drop). We manually override this to produce the expected       //
 //  behavior.                                                         //
       stop: function() {
@@ -110,18 +121,18 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
 ////////////////////////////////////////////////////////////////////////
     });
 
-
     var $loops = this.$el.find('.loop');
     $loops.draggable({ 
                        cursor: 'no-drop',
                        connectToSortable: '.measure-loops-list',
                        // handle: '.loop-title',
                        // revert: 150,
-                       // appendTo: 'body',
+                       // appendTo: '#users-list-append-target',
                        scroll: false,
                        helper: 'clone',
                      });
-                      
+
+    this.$('#measures-list').prepend(this.drawPlayhead());
 
     return this;
   }

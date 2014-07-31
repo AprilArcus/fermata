@@ -1,14 +1,17 @@
+<% var bgcolor = loop.escape('color') %>
+<% var fgcolor = Dianthus.getForegroundColor(bgcolor) %>
+
 <button type="button"
         class="btn btn-default destroy"
-        style="background-color: <%= loop.escape('color') %>">
+        style="background-color: <%= bgcolor %>; color: <%= fgcolor %>">
   <span class="glyphicon glyphicon-trash"></span>
 </button>
 <div class="btn btn-default loop-title"
-     style="background-color: <%= loop.escape('color') %>">
+     style="background-color: <%= bgcolor %>; color: <%= fgcolor %>">
   <%= loop.escape('title') %>
 </div>
 <button type="button"
         class="btn btn-default edit"
-        style="background-color: <%= loop.escape('color') %>">
+        style="background-color: <%= bgcolor %>; color: <%= fgcolor %>">
   <span class="glyphicon glyphicon-pencil"></span>
 </button>

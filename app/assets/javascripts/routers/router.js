@@ -26,10 +26,13 @@ Dianthus.Routers.Router = Backbone.Router.extend({
   },
 
   loopUpdate: function(id) {
-    var loopComposeView = new Dianthus.Views.LoopCompose({
-      model: Dianthus.currentUser.loops().getOrFetch(id)
+    var loop = new Dianthus.Models.Loop({id: id});
+    var router = this;
+    loop.fetch({success: function() {
+        var loopComposeFormView = new Dianthus.Views.LoopComposeForm({model: loop});
+        router._swapView(loopComposeFormView);
+      }
     });
-    this._swapView(loopComposeView);
   },
 
   // development

@@ -66,16 +66,8 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
   },
 
   updateUIColor: function(color) {
-    // calculate appropriate foreground color
-    // h/t Gacek, http://stackoverflow.com/a/1855903
-    var red   = parseInt(color.slice(-6, -4), 16);
-    var green = parseInt(color.slice(-4, -2), 16);
-    var blue  = parseInt(color.slice(-2), 16);
-    var perceptiveLuminance = 1 - (0.299 * red +
-                                   0.587 * green +
-                                   0.114 * blue) / 255;
     this.el.style['background-color'] = color;
-    this.el.style.color = (perceptiveLuminance < 0.5) ? 'black' : 'white';
+    this.el.style.color = Dianthus.getForegroundColor(color);
   },
 
   highlightSave: function(event) {
@@ -95,8 +87,8 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     loop.save(formData,
             { patch: !loop.isNew(),
               success: function() {
-                Dianthus.currentUser.loops().add(loop, {merge: true});
-                Backbone.history.navigate('#', {trigger: true});
+                Dianthus.currentUser.loops.add(loop, {merge: true});
+                Backbone.history.navigate('#/verses/1/edit', {trigger: true}); // DEVELOPMENT
               },
               error: function(model, response) {
                 var titleError = (JSON.parse(response.responseText).title[0]);

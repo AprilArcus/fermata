@@ -44,7 +44,8 @@ input[type="color"] {
 select.form-control { 
   border:0; 
   color: $btn-default-color; 
-  background-color: $btn-default-bg;}
+  background-color: $btn-default-bg;
+}
 
 
 html,
@@ -460,14 +461,16 @@ select.scale-degree {
   -webkit-flex-basis: 0;
   flex-basis: 0;
 
-  overflow-y: auto;
-  overflow-x: hidden;
+  /*overflow-y: auto;*/
+  /*overflow-x: hidden;*/
 
   margin-bottom: 0;
 }
 
 .loop-index .panel-heading {
   border: none;    /* visual clutter */
+  padding-top: 15px;
+  padding-bottom: 0;
   /*height: $input-height-base*2 + $padding-base-vertical*2;*/
   /*position: relative;*/
   /*padding-bottom: 0;*/
@@ -487,10 +490,14 @@ select.scale-degree {
     /*height: $input-height-small*2 + $padding-small-vertical*2;*/
     border-radius: $border-radius-small;
   }
+  .gravatar {
+    border-radius: $border-radius-small;
+  }
 }
 
 .gravatar {
   width: 100%;
+  border-radius: $border-radius-base;
   /*float: left;*/
   /*padding-right: 15px;*/
 }
@@ -501,4 +508,40 @@ select.scale-degree {
   font-family: 'Proxima Nova';
   position: absolute;
   bottom: 4px;*/
+}
+
+#new-loop {
+  display: block;
+  margin-left: auto;
+}
+
+
+/*************** VERSE COMPOSER PLAYHEAD ******************/
+
+#measures-list {
+  position: relative;
+}
+
+#playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: $panel-body-padding;
+  right: 0;
+  z-index: -1;
+
+  display: -webkit-flex;
+  display: -flex;
+}
+
+@-webkit-keyframes time-slice-highlight {
+  0%   { background-color: transparent; }
+  20%  { background-color: $gray-lighter; }
+  100% { background-color: transparent; }
+}
+
+@keyframes time-slice-highlight {
+  0%   { background-color: transparent; }
+  20%  { background-color: $gray-lighter; }
+  100% { background-color: transparent; }
 }
