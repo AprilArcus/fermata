@@ -11,11 +11,11 @@ module Api
     end
 
     def create
-      measure_loop = MeasureLoop.new(measure_loop_params)
-      if measure_loop.update_attributes(measure_loop_params)
-        render json: measure_loop
+      @measure_loop = MeasureLoop.new(measure_loop_params)
+      if @measure_loop.update_attributes(measure_loop_params)
+        render :show
       else
-        render json: measure_loop.errors, status: :unprocessable_entity
+        render json: @measure_loop.errors, status: :unprocessable_entity
       end
     end
 

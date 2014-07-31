@@ -12,13 +12,15 @@
  *
  *= require_self
  *  require jquery.ui.all
- *= require_tree .
+ *  require_tree .
  */
 
 /* TODO: Inherit from theme and transparentize only in the grid view ? */
 
-$btn-default-bg: rgba(255, 255, 255, 0.5);
-$input-bg: rgba(255, 255, 255, 0.5);
+/*$btn-default-bg: rgba(255, 255, 255, 0.5);
+$input-bg: rgba(255, 255, 255, 0.5);*/
+
+@import "darkly";
 
 @import "bootstrap";
 @import "font-awesome";
@@ -29,7 +31,7 @@ input::-webkit-color-swatch { border-radius: $border-radius-base; }
 input::-moz-color-swatch { border-radius: $border-radius-base; }
 
 input[type="color"] {
-  min-width: 34px !important;
+  min-width: 43px !important;
   padding: 5px 5px !important;
 }
 
@@ -38,6 +40,11 @@ input[type="color"] {
   transition: background 150ms linear;
   transition: color 40ms linear;
 }
+
+select.form-control { 
+  border:0; 
+  color: $btn-default-color; 
+  background-color: $btn-default-bg;}
 
 
 html,
@@ -72,8 +79,8 @@ body,
   flex-direction: column;
   -webkit-flex-direction: column;
 
-  margin-left: $grid-gutter-width/2;
-  margin-right: $grid-gutter-width/2;
+  border-left: $grid-gutter-width/2 solid $body-bg;
+  border-right: $grid-gutter-width/2 solid $body-bg;
 }
 
 #Dianthus-Views-LoopCompose,
@@ -85,9 +92,12 @@ body,
 #Dianthus-Views-LoopCompose {
   display: -webkit-flex;
   display: flex;
+  background-color: transparent;
 }
 
 .time-slice {
+  background-color: $body-bg;
+
   display: -webkit-flex;
   display: flex;
 
@@ -105,22 +115,22 @@ body,
 }
 
 @-webkit-keyframes time-slice-highlight {
-  0%   { background-color: transparent; }
-  20%  { background-color: yellow; }
-  100% { background-color: transparent; }
+  0%   { background-color: $body-bg; }
+  20%  { background-color: transparent; }
+  100% { background-color: $body-bg; }
 }
 
 @keyframes time-slice-highlight {
-  0%   { background-color: transparent; }
-  20%  { background-color: yellow; }
-  100% { background-color: transparent; }
+  0%   { background-color: $body-bg; }
+  20%  { background-color: transparent; }
+  100% { background-color: $body-bg; }
 }
 
 .note {
   width: 100%;
   padding: 2px;
   background-clip: content-box;
-  background-color: #eee;
+  background-color: $gray;
   border-radius: $border-radius-base * 2;
 }
 
@@ -152,7 +162,7 @@ body,
   flex-grow: 0.618;
 }
 [data-velocity="127"] {
-  background-color: red;
+  background-color: $gray-lighter;
 }
 [data-continued="true"] {
   padding-right: 0;
@@ -171,6 +181,7 @@ body,
     border-radius: 0;
     border-left: none;
     border-right: none;
+    background-color: transparent;
   }
 
   .navbar-form {
@@ -292,7 +303,7 @@ input:checked {
   input::-moz-color-swatch { border-radius: $border-radius-small; }
 
   input[type="color"] {
-    min-width: 30px !important;
+    min-width: 33px !important;
   }
 
 }
@@ -347,7 +358,7 @@ select.scale-degree {
 }
 
 @media screen and (max-width: 480px) {
-  .measure-loop, .measure-loop-placeholder {
+  .loop, .measure-loop, .measure-loop-placeholder {
     margin: $padding-small-vertical*2 0;
   }
 
@@ -448,13 +459,22 @@ select.scale-degree {
   flex-grow: 1;
   -webkit-flex-basis: 0;
   flex-basis: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  margin-bottom: 0;
 }
 
 .loop-index .panel-heading {
-  border: none; /* flatly/darkly does this, and wisely - it is like the
-                   most cluttery element in stock bootstrap */
-  height: $input-height-base*2 + $padding-base-vertical*2;
-  position: relative;
+  border: none;    /* visual clutter */
+  /*height: $input-height-base*2 + $padding-base-vertical*2;*/
+  /*position: relative;*/
+  /*padding-bottom: 0;*/
+}
+
+.panel {
+  border: none;
 }
 
 .loop-index {
@@ -464,21 +484,21 @@ select.scale-degree {
 
 @media screen and (max-width: 480px) {
   .loop-index .panel-heading {
-    height: $input-height-small*2 + $padding-small-vertical*2;
+    /*height: $input-height-small*2 + $padding-small-vertical*2;*/
     border-radius: $border-radius-small;
   }
 }
 
 .gravatar {
-  height: 100%;
-  float: left;
-  padding-right: 15px;
+  width: 100%;
+  /*float: left;*/
+  /*padding-right: 15px;*/
 }
 
 .loop-index .panel-title {
-  display: inline;
+/*  display: inline;
   font-size: ceil(($font-size-base * 2.3));
   font-family: 'Proxima Nova';
   position: absolute;
-  bottom: 4px;
+  bottom: 4px;*/
 }

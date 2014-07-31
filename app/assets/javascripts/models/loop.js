@@ -12,8 +12,15 @@ Dianthus.Models.Loop = Backbone.Model.extend({
             key: 'C',
             mode: 'MAJOR',
             instrument: 0,
-            color: '#f8f8f8'}; // TODO: fetch default bgcolor from bootstrap
-                               // theme variable.
+            color: _(['#e74c3c', // red, darkly @brand-danger
+                      '#f87121', // orange
+                      '#f39c12', // yellow, darkly @brand-warning
+                      '#65bf3b', // green
+                      '#00bc8c', // teal, darkly @brand-success
+                      '#3498db', // blue, darkly @brand-info
+                      '#cd50f6', // purple
+                      '#fe2d81'  // nicole h/t mella https://www.flickr.com/photos/hyperborea/2720901732
+                      ]).sample()};
   },
 
   toJSON: function() {

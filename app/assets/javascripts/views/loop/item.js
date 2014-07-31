@@ -5,6 +5,10 @@ Dianthus.Views.LoopItem = Backbone.View.extend({
 
   className: 'btn-group loop',
 
+  attributes: function() {
+    return {'data-loop-id': this.model.id};
+  },
+
   events: { 'click .destroy': 'destroy' },
 
   destroy: function() {

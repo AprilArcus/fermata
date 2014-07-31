@@ -74,8 +74,8 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     var perceptiveLuminance = 1 - (0.299 * red +
                                    0.587 * green +
                                    0.114 * blue) / 255;
-    this.$('.navbar').css({'background-color': color,
-                           'color': (perceptiveLuminance < 0.5) ? 'black' : 'white'});
+    this.el.style['background-color'] = color;
+    this.el.style.color = (perceptiveLuminance < 0.5) ? 'black' : 'white';
   },
 
   highlightSave: function(event) {

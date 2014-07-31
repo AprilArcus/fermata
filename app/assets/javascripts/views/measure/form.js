@@ -19,11 +19,12 @@ Dianthus.Views.MeasureForm = Backbone.CompositeView.extend({
     var view = new Dianthus.Views.MeasureLoopItem( {model: measureLoop} );
     this.addSubview(selector, view);
     this.listenTo(view, 'remove', this.removeSubview.bind(this, selector));
+    return view;
   },
 
   events: {
     'change .scale-degree' : 'updateScaleDegree',
-    'sortupdate .measure-loops-list': 'updateOrds',
+    'sortupdate .measure-loops-list': 'updateCollection',
     'sortremove .measure-loops-list': 'cleanUpCollection'
   },
 
@@ -32,19 +33,35 @@ Dianthus.Views.MeasureForm = Backbone.CompositeView.extend({
     this.model.save({'scale_degree': scaleDegree}, {patch: true});
   },
 
-  updateOrds: function(event, ui) {
+  updateCollection: function(event, ui) {
+    var _this = this;
     var measureId = this.model.get('id');
     var measure_loops = this.model.measure_loops;
     var measure_loop_nodes = event.target.children;
-
+    var measureLoop;
     _(measure_loop_nodes).each(function(node, index) {
       var measureLoopId = node.getAttribute('data-measure-loop-id');
-      var measureLoop = measure_loops.get(measureLoopId);
-      if(!measureLoop) { // inbound object
-        measureLoop = new Dianthus.Models.MeasureLoop({id: measureLoopId});
-        measure_loops.add(measureLoop);
+      if (measureLoopId) { // sorting
+        measureLoop = measure_loops.get(measureLoopId);
+        if(!measureLoop) { // inbound measure loop from another measure
+          measureLoop = new Dianthus.Models.MeasureLoop({id: measureLoopId});
+          measure_loops.add(measureLoop);
+        }
+        measureLoop.save({ord: index, measure_id: measureId}, {patch: true});
+      } else { // inbound loop from loops palette: we must create a new
+               // row in the measure_loops join table server-side
+        var loopId = node.getAttribute('data-loop-id');
+        measureLoop = measure_loops.create({
+          measure_id: measureId, loop_id: loopId, ord: index
+                                           }, { success: function(model) {
+            var measureLoopItemView = _this.addMeasureLoop(model);
+            // var measureLoopItemView = new Dianthus.Views.MeasureLoopItem( {model: model} );
+            $(node).replaceWith(measureLoopItemView.render().el);
+          }
+        });
+        //
+        
       }
-      measureLoop.save({'ord': index, 'measure_id': measureId}, {patch: true});
     });
   },
 

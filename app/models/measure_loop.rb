@@ -12,6 +12,7 @@
 #
 
 class MeasureLoop < ActiveRecord::Base
+  before_validation { self.instrument = loop.instrument unless instrument }
 
   validates :measure, :loop, :instrument, :ord, presence: true
 
