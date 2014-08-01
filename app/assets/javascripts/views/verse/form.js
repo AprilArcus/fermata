@@ -204,6 +204,11 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
     this.play();
 
     return this;
+  },
+
+  remove: function() {
+    this.pause();
+    Backbone.View.prototype.remove.call(this);
   }
 
 });
