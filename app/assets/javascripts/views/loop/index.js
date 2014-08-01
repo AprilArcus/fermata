@@ -34,9 +34,9 @@ Dianthus.Views.LoopsIndex = Backbone.CompositeView.extend({
     this.$el.html(rendered);
     this.attachSubviews();
     if (this.author === Dianthus.currentUser) {
-      console.log(this.$('.loops-list').append(
+      this.$('.loops-list').append(
         '<li><button class="btn btn-default" id="new-loop">New</button></li>'
-      ));
+      );
     }
     return this;
   }

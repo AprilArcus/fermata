@@ -46,6 +46,10 @@ Dianthus.Views.MeasureForm = Backbone.CompositeView.extend({
         if(!measureLoop) { // inbound measure loop from another measure
           measureLoop = new Dianthus.Models.MeasureLoop({id: measureLoopId});
           measure_loops.add(measureLoop);
+       // the dropped jQuery UI element still has its destroy event handler
+       // wired up to the wrong collection
+       // var measureLoopItemView = _this.addMeasureLoop(measureLoop);
+       // $(node).replaceWith(measureLoopItemView.render().el);
         }
         measureLoop.save({ord: index, measure_id: measureId}, {patch: true});
       } else { // inbound loop from loops palette: we must create a new

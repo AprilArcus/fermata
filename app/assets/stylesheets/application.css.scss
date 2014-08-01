@@ -51,6 +51,7 @@ select.form-control {
 html,
 body,
 #Dianthus-Routers-SwapView-Target,
+#Dianthus-Views-LoopComposeForm-Container,
 #Dianthus-Views-LoopComposeForm,
 #Dianthus-Views-VerseForm {
   height: 100%;
@@ -534,14 +535,32 @@ select.scale-degree {
   display: -flex;
 }
 
-@-webkit-keyframes time-slice-highlight {
-  0%   { background-color: transparent; }
-  20%  { background-color: $gray-lighter; }
+@-webkit-keyframes verse-time-slice-highlight {
+  0%   { background-color: $gray-lighter; }
   100% { background-color: transparent; }
 }
 
-@keyframes time-slice-highlight {
-  0%   { background-color: transparent; }
-  20%  { background-color: $gray-lighter; }
+@keyframes verse-time-slice-highlight {
+  0%   { background-color: $gray-lighter; }
   100% { background-color: transparent; }
+}
+
+
+/*************** title buttons ************/
+
+#Dianthus-Views-VerseForm {
+  .loop > .btn:first-child, .measure-loop > .btn:first-child {
+    border-right: 0;
+  }
+  .loop-title, .loop-title + .btn, .measure-loop-title, .dropdown-toggle {
+    border-left: 0;
+  }
+  .loop > .btn:hover,
+  .measure-loop > .btn:hover {
+    border-color: $btn-default-bg;
+  }
+}
+
+.modal-dialog {
+  color: $text-color; /* weird darkly / bootswatch oversight? */
 }

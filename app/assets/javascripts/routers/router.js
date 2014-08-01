@@ -4,19 +4,19 @@ Dianthus.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    '': 'currentUserShow',
+    '': 'loopCreate',
     'loops/new': 'loopCreate',
     'loops/:id/edit': 'loopUpdate',
     'measures/:id/edit': 'measureUpdate', //development
     'verses/:id/edit': 'verseUpdate'
   },
 
-  currentUserShow: function() {
-    var currentUserShowView = new Dianthus.Views.UserShow({
-                                    model: Dianthus.currentUser
-                                  });
-    this._swapView(currentUserShowView);
-  },
+  // currentUserShow: function() {
+  //   var currentUserShowView = new Dianthus.Views.UserShow({
+  //                                   model: Dianthus.currentUser
+  //                                 });
+  //   this._swapView(currentUserShowView);
+  // },
 
   loopCreate: function() {
     var loopComposeView = new Dianthus.Views.LoopComposeForm({

@@ -1,197 +1,206 @@
-<div id="Dianthus-Views-LoopComposeForm-Options"
-     class="navbar navbar-default">
-  <div class="container-fluid">
-    <form class="navbar-form">
-      <div class="form-group">
-        <label class="sr-only"
-               for="play">
-          play/pause
-        </label>
-        <button type="button"
-                id="play-pause"
-                class="btn btn-default active"
-                data-toggle="button">
-          <span id="play" class="glyphicon glyphicon-play"></span>
-          <span id="pause" class="glyphicon glyphicon-pause"></span>
-        </button>
-      </div>
-      <div class="form-group">
-        <label class="control-label visible-lg-inline-block">
-          in the key of
-        </label>
-        <div id="key-radio"
-             class="btn-group hidden-xs hidden-sm"
-             data-toggle="buttons">
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="F">F
-          </label>
-          <label class="btn btn-default active">
-            <input type="radio"
-                   name="key"
-                   value="C"
-                   checked>C
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="G">G
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="D">D
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="A">A
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="E">E
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="B">B
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="Gb">G&#x266d;
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="Db">D&#x266d;
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="Ab">A&#x266d;
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="Eb">E&#x266d;
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="key"
-                   value="Bb">B&#x266d;
-          </label>
-        </div> <!-- /.button-group -->
-        <select id="key-select"
-                name="key"
-                class="form-control
-                       visible-xs-inline-block
-                       visible-sm-inline-block">
-          <option value="F">F</option>
-          <option value="C" selected="selected">C</option>
-          <option value="G">G</option>
-          <option value="D">D</option>
-          <option value="A">A</option>
-          <option value="E">E</option>
-          <option value="B">B</option>
-          <option value="Gb">G♭</option>
-          <option value="Db">D♭</option>
-          <option value="Ab">A♭</option>
-          <option value="Eb">E♭</option>
-          <option value="Bb">B♭</option>
-        </select>
-      </div> <!-- /.form-group -->
-      <div class="form-group">
-        <div id="mode-radio"
-             class="btn-group"
-             data-toggle="buttons">
-          <label class="btn btn-default active">
-            <input type="radio"
-                   name="mode"
-                   value="MAJOR"
-                   checked="checked">Major
-          </label>
-          <label class="btn btn-default">
-            <input type="radio"
-                   name="mode"
-                   value="MINOR">Minor
-          </label>
-        </div>
-        <select id="mode-select"
-                name="mode"
-                class="form-control" >
-          <option value="MAJOR" selected="selected">Major</option>
-          <option value="MINOR">Minor</option>
-        </select>
-      </div> <!-- /.form-group -->
-      <div class="form-group">
-        <label class="control-label hidden-xs hidden-sm hidden-md">
-          on the
-        </label>
-        <select id="instrument" name="instrument" class="form-control">
-          <option selected="selected">Acoustic Grand Piano</option>
-          <option>Synth Drums</option>
-        </select>
-      </div> <!-- /.form-group -->
-    </form>
-
-    <form class="navbar-form navbar-right">
-      <div class="form-group navbar-right">
-        <!-- <label class="control-label hidden-xs">Guest</label> -->
-        <label class="sr-only" for="title">Sign Out</label>
-        <button type="button"
-                id="sign-out"
-                class="btn btn-default">
-          <span class="glyphicon glyphicon-log-out"></span>
-        </button>
-      </div> <!-- /.form-group -->
-    </form>
-
-  </div>
-</div>
-
-<div id="Dianthus-Views-LoopCompose-Target"></div>
-
-<div id="Dianthus-Views-LoopComposeForm-Submit"
-     class="navbar navbar-default">
-  <div class="container-fluid">
-    <form class="navbar-form navbar-right">
-      <div class="form-group">
-        <label class="sr-only"
-               for="color">
-          Color
-        </label>
-        <input type="color"
-               name="color"
-               class="form-control"
-               value="<%= loop.escape('color') %>"
-               id="color"> <!-- TODO polyfill available:
-                                http://bgrins.github.io/spectrum/ -->
-      </div> <!-- /.form-group -->
-      <div class="alert alert-title">
-        <span class="alert-message"></span>
+<div id="Dianthus-Views-LoopComposeForm">
+  <div id="Dianthus-Views-LoopComposeForm-Options"
+       class="navbar navbar-default">
+    <div class="container-fluid">
+      <form class="navbar-form">
         <div class="form-group">
           <label class="sr-only"
-               for="title">
-          Title
+                 for="play">
+            play/pause
           </label>
-          <input type="text"
-                 name="title"
-                 class="form-control"
-                 id="title"
-                 <% if (!loop.isNew()) { %>
-                 value="<%= loop.escape('title') %>"
-                 <% } %>
-                 placeholder="Untitled">
+          <button type="button"
+                  id="play-pause"
+                  class="btn btn-default active"
+                  data-toggle="button">
+            <span id="play" class="glyphicon glyphicon-play"></span>
+            <span id="pause" class="glyphicon glyphicon-pause"></span>
+          </button>
+        </div>
+        <div class="form-group">
+          <label class="control-label visible-lg-inline-block">
+            in the key of
+          </label>
+          <div id="key-radio"
+               class="btn-group hidden-xs hidden-sm"
+               data-toggle="buttons">
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="F">F
+            </label>
+            <label class="btn btn-default active">
+              <input type="radio"
+                     name="key"
+                     value="C"
+                     checked>C
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="G">G
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="D">D
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="A">A
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="E">E
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="B">B
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="Gb">G&#x266d;
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="Db">D&#x266d;
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="Ab">A&#x266d;
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="Eb">E&#x266d;
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="key"
+                     value="Bb">B&#x266d;
+            </label>
+          </div> <!-- /.button-group -->
+          <select id="key-select"
+                  name="key"
+                  class="form-control
+                         visible-xs-inline-block
+                         visible-sm-inline-block">
+            <option value="F">F</option>
+            <option value="C" selected="selected">C</option>
+            <option value="G">G</option>
+            <option value="D">D</option>
+            <option value="A">A</option>
+            <option value="E">E</option>
+            <option value="B">B</option>
+            <option value="Gb">G♭</option>
+            <option value="Db">D♭</option>
+            <option value="Ab">A♭</option>
+            <option value="Eb">E♭</option>
+            <option value="Bb">B♭</option>
+          </select>
         </div> <!-- /.form-group -->
-      </div>
-      <div class="form-group">
-        <button type="submit"
-                id="submit"
-                class="btn btn-default">Save</button>
-      </div> <!-- /.form-group -->
-    </form>
+        <div class="form-group">
+          <div id="mode-radio"
+               class="btn-group"
+               data-toggle="buttons">
+            <label class="btn btn-default active">
+              <input type="radio"
+                     name="mode"
+                     value="MAJOR"
+                     checked="checked">Major
+            </label>
+            <label class="btn btn-default">
+              <input type="radio"
+                     name="mode"
+                     value="MINOR">Minor
+            </label>
+          </div>
+          <select id="mode-select"
+                  name="mode"
+                  class="form-control" >
+            <option value="MAJOR" selected="selected">Major</option>
+            <option value="MINOR">Minor</option>
+          </select>
+        </div> <!-- /.form-group -->
+        <div class="form-group">
+          <label class="control-label hidden-xs hidden-sm hidden-md">
+            on the
+          </label>
+          <select id="instrument" name="instrument" class="form-control">
+            <option selected="selected">Acoustic Grand Piano</option>
+            <option>Synth Drums</option>
+          </select>
+        </div> <!-- /.form-group -->
+      </form>
+
+      <form class="navbar-form navbar-right">
+        <div class="form-group navbar-right">
+          <!-- <label class="control-label hidden-xs">Guest</label> -->
+          <label class="sr-only" for="title">Sign Out</label>
+          <button type="button"
+                  id="sign-out"
+                  class="btn btn-default">
+            <span class="glyphicon glyphicon-log-out"></span>
+          </button>
+        </div> <!-- /.form-group -->
+      </form>
+
+    </div>
   </div>
+
+  <div id="Dianthus-Views-LoopCompose-Target"></div>
+
+  <div id="Dianthus-Views-LoopComposeForm-Submit"
+       class="navbar navbar-default">
+    <div class="container-fluid">
+      <form class="navbar-form navbar-right">
+        <div class="form-group">
+          <label class="sr-only"
+                 for="color">
+            Color
+          </label>
+          <input type="color"
+                 name="color"
+                 class="form-control"
+                 value="<%= loop.escape('color') %>"
+                 id="color"> <!-- TODO polyfill available:
+                                  http://bgrins.github.io/spectrum/ -->
+        </div> <!-- /.form-group -->
+        <div class="alert alert-title">
+          <span class="alert-message"></span>
+          <div class="form-group">
+            <label class="sr-only"
+                 for="title">
+            Title
+            </label>
+            <input type="text"
+                   name="title"
+                   class="form-control"
+                   id="title"
+                   <% if (!loop.isNew()) { %>
+                   value="<%= loop.escape('title') %>"
+                   <% } %>
+                   placeholder="Untitled">
+          </div> <!-- /.form-group -->
+        </div>
+        <div class="form-group">
+          <button type="submit"
+                  id="submit"
+                  class="btn btn-default">Save</button>
+        </div> <!-- /.form-group -->
+      </form>
+    </div>
+  </div>
+</div> <!-- /#Dianthus-Views-LoopComposeForm -->
+<div class="modal fade"
+     id="new-session"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="new-session-label"
+     aria-hidden="true">
 </div>

@@ -3,9 +3,11 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
   initialize: function() {
     this.composer = new Dianthus.Views.LoopCompose({model: this.model});
     this.addSubview('#Dianthus-Views-LoopCompose-Target', this.composer);
+    this.addSubview('#new-session', new Dianthus.Views.SessionForm({parentView: this}));
+    this.listenTo(this, 'signInSuccess', this.signInSuccess);
   },
 
-  id: 'Dianthus-Views-LoopComposeForm',
+  id: 'Dianthus-Views-LoopComposeForm-Container',
 
   events: {'click #play-pause': 'playPause',
            'change select': 'syncRadioToSelect',
@@ -15,7 +17,8 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
            'change #color': 'updateColor',
            'focus #title': 'highlightSave',
            'blur #title': 'dimSave',
-           'submit form': 'submit'
+           'submit form': 'submit',
+           'hide.bs.modal #new-session' : 'cancelSignIn'
   },
 
   playPause: function(event) {
@@ -84,22 +87,60 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     var formData = $(event.target).serializeJSON();
     _(formData).extend(options);
     var loop = this.model;
-    loop.save(formData,
-            { patch: !loop.isNew(),
-              success: function() {
+    formData.time_slices = loop.toJSON().time_slices;
+    ////////////////////////////////////////////////////////////////////
+    //                                                                //
+    //             ///////                   //  //  //               //
+    //            //    //                      //  //                //   
+    //           //    //  /////     ////  //  //  //   /////         //
+    //          ///////       //   //     //  //  //       //         //
+    //         //    //   /////  //      //  //  //    /////          //
+    //        //    //  //  //  //      //  //  //   //  //           //
+    //       ///////   //// /  //      //  //  //   //////            //
+    //                                                                //
+    ////////////////////////////////////////////////////////////////////
+    // 2. It might be the case that the user is not signed in when    //
+    //    they submit the form.                                       //
+    ////////////////////////////////////////////////////////////////////
+    this.submitCallback = function() { // 4. We'll store the save     //
+    loop.save(formData,                //    routine in its current   //
+            { patch: !loop.isNew(),    //    state in wide scope.     //
+              success: function() {    /////////////////////////////////
                 Dianthus.currentUser.loops.add(loop, {merge: true});
-                Backbone.history.navigate('#/verses/1/edit', {trigger: true}); // DEVELOPMENT
+                Backbone.history.navigate('#/verses/1/edit', {trigger: true}); // TODO: 'back'
               },
-              error: function(model, response) {
-                var titleError = (JSON.parse(response.responseText).title[0]);
-                $titleAlert = $('.alert-title');
-                $titleAlert.find('.alert-message').html(titleError);
-                $titleAlert.addClass('alert-danger');
+              error: function(model, response) { ///////////////////////
+                if (response.status === 401) {   // 3. If so, open a  //
+                  $('#new-session').modal();     //    sign-in modal. //
+                } else if (response.status === 422) {///////////////////
+               // validate
+                  var titleError = (JSON.parse(response.responseText).title[0]);
+                  $titleAlert = $('.alert-title');
+                  $titleAlert.find('.alert-message').html(titleError);
+                  $titleAlert.addClass('alert-danger');
+                } else {
+                  throw response;
+                }
               }
             });
-  },
+    };                     /////////////////////////////////////////////
+    this.submitCallback(); // 1. Try to save.                         //
+  },                       /////////////////////////////////////////////
+                                       // 5A. Listen for a successful //
+  signInSuccess: function() {          //     sign in event, and try  //
+    if (this.submitCallback) {         //     again where we left off //
+      this.submitCallback();           /////////////////////////////////
+      $('#new-session').modal('hide');
+    } else {
 
-  template: JST['loop/form'],
+    }                                ///////////////////////////////////
+  },                                 // 5B. Listen for a cancel       //
+                                     //     message and clear the     //
+  cancelSignIn: function() {         //     callback in case the user //
+    this.submitCallback = undefined; //     signs in through the      //
+  },                                 //     toolbar later.            //
+                                     ///////////////////////////////////
+  template: JST['loop/form'],        
 
   render: function() {
     var rendered = this.template( {loop: this.model} );

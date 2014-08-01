@@ -1,8 +1,13 @@
 <script>
+  <% if current_user %>
+  Dianthus.currentUser = new Dianthus.Models.User({id: <%= current_user.id %>})
+  Dianthus.currentUser.fetch({success: function() {
+      $(Dianthus.initialize);
+    }
+  })
+  <% else %>
+  Dianthus.currentUser = undefined;
   $(Dianthus.initialize);
-  Dianthus.currentUser = new Dianthus.Models.User( {
-                               id: <%= current_user.id %>
-                             });
-  Dianthus.currentUser.fetch();
+  <% end %>
 </script>
 <div id="Dianthus-Routers-SwapView-Target"></div>

@@ -13,6 +13,83 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
       new Dianthus.Views.LoopsIndex( {collection: Dianthus.currentUser.loops,
                                       author: Dianthus.currentUser} );
     this.addSubview('#users-list', currentUserLoopsIndexView);
+
+    this.playhead = this.drawPlayhead();
+
+    this.bpm = 90;
+    this.timeIndex = 0;
+
+    this.key = MIDI.keyToNote.C4;
+    this.mode = Dianthus.Modes.MAJOR;
+  },
+
+  events: {// remove the animation so we can trigger it again
+           // h/t David Murdoch, http://stackoverflow.com/a/4811212
+           // TODO refactor with compose.js
+           'webkitAnimationEnd .time-slice': function (event) {
+              event.target.style.webkitAnimationName = '';
+            },
+           'animationend .time-slice': function (event) {
+              event.target.style.animationName = '';
+            }
+  },
+
+  playOneTimeSlice: function() {
+    var timeIndex = this.timeIndex;
+    var key = this.key;
+    var mode = this.mode;
+    // highlight the current column
+    // console.log(this.playhead.children[this.timeIndex]);
+    var gridCol = this.playhead.children[this.timeIndex];
+    gridCol.style.webkitAnimationName = 'verse-time-slice-highlight';
+    gridCol.style.animationName = 'verse-time-slice-highlight';
+
+    // play the notes
+    var measure = this.model.measures.at(~~(timeIndex/16));
+    var measureLoops = measure.measure_loops;
+    measureLoops.each(function(measureLoop){
+      var timeSlices = measureLoop.loop.get('time_slices');
+      var notes = timeSlices[timeIndex % 16];
+      _(notes).each(function(note, noteIndex) {
+        if (note.velocity > 0) {
+          var velocity = note.velocity;
+          var MidiNote = Dianthus.transpose(noteIndex, key, mode);
+          MIDI.noteOn(0, MidiNote, note.velocity, 0);
+          MIDI.noteOff(0, MidiNote, 0.75);
+        }
+      });
+    });
+
+
+    // var notes = this.timeSlices[this.timeIndex];
+    // var _this = this;
+    // _(notes).each(function(note, noteIndex) {
+    //   if (note.velocity > 0) {
+    //     var velocity = note.velocity;
+    //     var MidiNote = Dianthus.transpose(noteIndex, _this.key, _this.mode);
+    //     MIDI.noteOn(0, MidiNote, note.velocity, 0);
+    //     MIDI.noteOff(0, MidiNote, 0.75);
+    //   }
+    // });
+    
+    // advance the playhead
+    this.timeIndex += 1;
+    this.timeIndex %= 64;
+  },
+
+  semiquaver: function() {
+    return 15000 / this.bpm;
+  },
+
+  play: function() {
+    this.interval = setInterval(this.playOneTimeSlice.bind(this),
+                                this.semiquaver());
+    this.playing = true;
+  },
+
+  pause: function() {
+    clearInterval(this.interval);
+    this.playing = false;
   },
 
   addMeasure: function(measure) {
@@ -132,7 +209,9 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
                        helper: 'clone',
                      });
 
-    this.$('#measures-list').prepend(this.drawPlayhead());
+    this.$('#measures-list').prepend(this.playhead);
+
+    this.play();
 
     return this;
   }
