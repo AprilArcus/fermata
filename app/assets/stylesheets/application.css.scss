@@ -499,8 +499,13 @@ select.scale-degree {
 .gravatar {
   width: 100%;
   border-radius: $border-radius-base;
-  /*float: left;*/
-  /*padding-right: 15px;*/
+  margin-bottom: $padding-base-vertical*2 0;
+}
+
+@media screen and (max-width: 480px) {
+  .gravatar {
+    margin-bottom: $padding-small-vertical*2 0;
+  }
 }
 
 .loop-index .panel-title {
@@ -564,3 +569,5 @@ select.scale-degree {
 .modal-dialog {
   color: $text-color; /* weird darkly / bootswatch oversight? */
 }
+
+
