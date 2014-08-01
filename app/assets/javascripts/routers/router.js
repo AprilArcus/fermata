@@ -7,7 +7,6 @@ Dianthus.Routers.Router = Backbone.Router.extend({
     '': 'root',
     'loops/new': 'loopCreate',
     'loops/:id/edit': 'loopUpdate',
-    // 'measures/:id/edit': 'measureUpdate', //development
     'verses/new': 'verseCreate',
     'verses/:id/edit': 'verseUpdate'
   },
@@ -38,22 +37,12 @@ Dianthus.Routers.Router = Backbone.Router.extend({
     });
   },
 
-  // development
-  // measureUpdate: function(id) {
-  //   var measure = new Dianthus.Models.Measure({id: id});
-  //   var router = this;
-  //   measure.fetch({success: function() {
-  //     var measureFormView = new Dianthus.Views.MeasureForm({ model: measure });
-  //     router._swapView(measureFormView);
-  //     }
-  //   });
-  // },
-
   verseCreate: function() {
-    var verseFormView = new Dianthus.Views.VerseForm({
-      model: new Dianthus.Models.Verse()
+    var verse = new Dianthus.Models.Verse().save({}, {
+      success: function(model, response, options) {
+        Backbone.history.navigate('#/verses/' + model.id + '/edit', {trigger: true});
+      }
     });
-    this._swapView(verseFormView);
   },
 
   verseUpdate: function(id) {

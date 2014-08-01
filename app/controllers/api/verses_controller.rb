@@ -11,11 +11,15 @@ module Api
     end
 
     def create
-      verse = current_user.verses.new(verse_params)
-      if verse.save
-        render json: verse
-      else
-        render json: verse.errors, status: :unprocessable_entity
+      # easiest way to get these deeply nested objects into backbone is
+      # to generate a template on the server
+      Verse.transaction do
+        begin
+          @verse = current_user.verses.create(title: 'untitled', key: 'C', mode: 'MAJOR')
+          render json: {id: @verse.id}
+        rescue
+          render json: @verse.errors, status: :unprocessable_entity
+        end
       end
     end
 

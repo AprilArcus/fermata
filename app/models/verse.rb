@@ -21,7 +21,7 @@ class Verse < ActiveRecord::Base
 
   def create_measures
     (4 - measures.count).times do |i|
-      self.measures.new(scale_degree: 0, ord: i)
+      self.measures.build(scale_degree: 0, ord: i)
     end
   end
 

@@ -37,8 +37,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
               type: 'delete',
               success: function(model, status, response) {
                 delete Dianthus.currentUser;
-                document.getElementById('sign-in').classList.remove('hidden');
-                document.getElementById('sign-out').classList.add('hidden');
+                Backbone.history.navigate('#', {trigger: true});
               }, error: function() {
                 throw 'fail in signout';
               }
@@ -115,8 +114,6 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
             { patch: !loop.isNew(),
               success: function() {
                 Dianthus.currentUser.loops.add(loop, {merge: true});
-                // console.log(Backbone.history.history.back);
-                // Backbone.history.navigate('#', {trigger: true}); // TODO: 'back'
                 Backbone.history.history.back();
               },
               error: function(model, response) {
