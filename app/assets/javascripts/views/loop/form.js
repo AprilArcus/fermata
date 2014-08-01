@@ -87,7 +87,10 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     var formData = $(event.target).serializeJSON();
     _(formData).extend(options);
     var loop = this.model;
-    formData.time_slices = loop.toJSON().time_slices;
+    if (!loop.isNew()) {
+      formData.time_slices = loop.toJSON().time_slices;
+    }
+    // if (loop.isNew()) {formData.time_slices = loop.toJSON().time_slices; }
     ////////////////////////////////////////////////////////////////////
     //                                                                //
     //             ///////                   //  //  //               //
