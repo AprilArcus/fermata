@@ -95,7 +95,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
             { patch: !loop.isNew(),
               success: function() {
                 Dianthus.currentUser.loops.add(loop, {merge: true});
-                Backbone.history.navigate('#/verses/1/edit', {trigger: true}); // TODO: 'back'
+                Backbone.history.navigate('#', {trigger: true}); // TODO: 'back'
               },
               error: function(model, response) {
                 if (response.status === 401) {

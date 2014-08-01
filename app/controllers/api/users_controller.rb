@@ -1,10 +1,10 @@
 module Api
-  class UsersController < ApiController
+  class UsersController < ApplicationController
 
     def create
       @user = User.new(user_params)
 
-      if user.save
+      if @user.save
         sign_in!(@user)
         render :show
       else
@@ -13,6 +13,7 @@ module Api
     end
 
     def show
+      require_signed_in!
       @user = User.find(params[:id])
       if @user
         render :show
