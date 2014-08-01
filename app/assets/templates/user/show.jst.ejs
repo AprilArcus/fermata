@@ -1,4 +1,32 @@
-<div class="container-fluid">
-  <div id="my-loops"></div>
-  <div id="friends"></div>
-</div>
+<ul id="user-show-loops" class="nav nav-pills nav-stacked">
+  <% user.loops.each(function(loop) { %>
+  <% var bgcolor = loop.escape('color') %>
+  <% var fgcolor = Dianthus.getForegroundColor(bgcolor) %>
+  <li>
+    <a href="#/loops/<%= loop.escape('id') %>/edit"
+       style="background-color: <%= bgcolor %>; color: <%= fgcolor %>">
+      <%= loop.escape('title') %>
+    </a>
+  </li>
+  <% }) %>
+  <li class="active">
+    <a href="#/loops/new">
+      New Loop
+    </a>
+  </li>
+</ul>
+<img class="gravatar" src="<%= user.escape('gravatar_url') %>">
+<ul id="user-show-verses" class="nav nav-pills nav-stacked">
+  <% user.verses.each(function(verse) { %>
+  <li>
+    <a href="#/verses/<%= verse.escape('id') %>/edit">
+      <%= verse.escape('title') %>
+    </a>
+  </li>
+  <% }) %>
+  <li class="active">
+    <a href="#/verses/new">
+      New Verse
+    </a>
+  </li>
+</ul>

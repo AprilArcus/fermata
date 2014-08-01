@@ -18,7 +18,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
            'focus #title': 'highlightSave',
            'blur #title': 'dimSave',
            'submit form': 'submit',
-           'hide.bs.modal #new-session' : 'cancelSignIn'
+           'hidden.bs.modal #new-session' : 'completeFormSubmission'
   },
 
   playPause: function(event) {
@@ -90,31 +90,18 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     if (!loop.isNew()) {
       formData.time_slices = loop.toJSON().time_slices;
     }
-    ////////////////////////////////////////////////////////////////////
-    //                                                                //
-    //             ///////                   //  //  //               //
-    //            //    //                      //  //                //   
-    //           //    //  /////     ////  //  //  //   /////         //
-    //          ///////       //   //     //  //  //       //         //
-    //         //    //   /////  //      //  //  //    /////          //
-    //        //    //  //  //  //      //  //  //   //  //           //
-    //       ///////   //// /  //      //  //  //   //////            //
-    //                                                                //
-    ////////////////////////////////////////////////////////////////////
-    // 2. It might be the case that the user is not signed in when    //
-    //    they submit the form.                                       //
-    ////////////////////////////////////////////////////////////////////
-    this.submitCallback = function() { // 4. We'll store the save     //
-    loop.save(formData,                //    routine in its current   //
-            { patch: !loop.isNew(),    //    state in wide scope.     //
-              success: function() {    /////////////////////////////////
+    var _this = this;
+    loop.save(formData,
+            { patch: !loop.isNew(),
+              success: function() {
                 Dianthus.currentUser.loops.add(loop, {merge: true});
                 Backbone.history.navigate('#/verses/1/edit', {trigger: true}); // TODO: 'back'
               },
-              error: function(model, response) { ///////////////////////
-                if (response.status === 401) {   // 3. If so, open a  //
-                  $('#new-session').modal();     //    sign-in modal. //
-                } else if (response.status === 422) {///////////////////
+              error: function(model, response) {
+                if (response.status === 401) {
+                  _this.tryingToSave = true;
+                  $('#new-session').modal();
+                } else if (response.status === 422) {
                // validate
                   var titleError = (JSON.parse(response.responseText).title[0]);
                   $titleAlert = $('.alert-title');
@@ -125,23 +112,21 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
                 }
               }
             });
-    };                     /////////////////////////////////////////////
-    this.submitCallback(); // 1. Try to save.                         //
-  },                       /////////////////////////////////////////////
-                                       // 5A. Listen for a successful //
-  signInSuccess: function() {          //     sign in event, and try  //
-    if (this.submitCallback) {         //     again where we left off //
-      this.submitCallback();           /////////////////////////////////
-      $('#new-session').modal('hide');
-    } else {
+  },
 
-    }                                ///////////////////////////////////
-  },                                 // 5B. Listen for a cancel       //
-                                     //     message and clear the     //
-  cancelSignIn: function() {         //     callback in case the user //
-    this.submitCallback = undefined; //     signs in through the      //
-  },                                 //     toolbar later.            //
-                                     ///////////////////////////////////
+  signInSuccess: function() {
+    this.signInDidSucceed = true;
+    $('#new-session').modal('hide');
+  },
+
+  completeFormSubmission: function() {
+    if (this.tryingToSave && this.signInDidSucceed) {
+      $('#submit').click();
+    }
+    this.tryingToSave = false;
+    this.signInDidSucceed = false;
+  },
+                                       
   template: JST['loop/form'],        
 
   render: function() {

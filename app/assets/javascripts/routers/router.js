@@ -4,19 +4,22 @@ Dianthus.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    '': 'loopCreate',
+    '': 'root',
     'loops/new': 'loopCreate',
     'loops/:id/edit': 'loopUpdate',
-    'measures/:id/edit': 'measureUpdate', //development
+    // 'measures/:id/edit': 'measureUpdate', //development
+    'verses/new': 'verseCreate',
     'verses/:id/edit': 'verseUpdate'
   },
 
-  // currentUserShow: function() {
-  //   var currentUserShowView = new Dianthus.Views.UserShow({
-  //                                   model: Dianthus.currentUser
-  //                                 });
-  //   this._swapView(currentUserShowView);
-  // },
+  root: function() {
+    if (!Dianthus.currentUser) {
+      Backbone.history.navigate('#/loops/new', {trigger: true});
+    } else {
+      var currentUserShowView = new Dianthus.Views.UserShow({ model: Dianthus.currentUser });
+      this._swapView(currentUserShowView);
+    }
+  },
 
   loopCreate: function() {
     var loopComposeView = new Dianthus.Views.LoopComposeForm({
@@ -36,14 +39,21 @@ Dianthus.Routers.Router = Backbone.Router.extend({
   },
 
   // development
-  measureUpdate: function(id) {
-    var measure = new Dianthus.Models.Measure({id: id});
-    var router = this;
-    measure.fetch({success: function() {
-      var measureFormView = new Dianthus.Views.MeasureForm({ model: measure });
-      router._swapView(measureFormView);
-      }
+  // measureUpdate: function(id) {
+  //   var measure = new Dianthus.Models.Measure({id: id});
+  //   var router = this;
+  //   measure.fetch({success: function() {
+  //     var measureFormView = new Dianthus.Views.MeasureForm({ model: measure });
+  //     router._swapView(measureFormView);
+  //     }
+  //   });
+  // },
+
+  verseCreate: function() {
+    var verseFormView = new Dianthus.Views.VerseForm({
+      model: new Dianthus.Models.Verse()
     });
+    this._swapView(verseFormView);
   },
 
   verseUpdate: function(id) {

@@ -497,13 +497,16 @@ select.scale-degree {
 }
 
 .gravatar {
-  width: 100%;
   border-radius: $border-radius-base;
+}
+
+.loop-index .gravatar {
+  width: 100%;
   margin-bottom: $padding-base-vertical*2 0;
 }
 
 @media screen and (max-width: 480px) {
-  .gravatar {
+  .loop-index .gravatar {
     margin-bottom: $padding-small-vertical*2 0;
   }
 }
@@ -570,4 +573,50 @@ select.scale-degree {
   color: $text-color; /* weird darkly / bootswatch oversight? */
 }
 
+#new-session .modal-footer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
 
+#new-session .modal-footer:before, #new-session .modal-footer:after {
+  content: none;
+};
+
+/***** Gross placeholder user show ****/
+
+#home {
+  height: 100%;
+}
+
+#home {
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+
+  margin-left: $panel-body-padding;
+  margin-right: $panel-body-padding;
+}
+
+#home .gravatar {
+  -webkit-align-self: center;
+  align-self: center;
+}
+
+#home li {
+  margin-top: $panel-body-padding;
+  margin-bottom: $panel-body-padding;;
+}
+
+#home ul {
+  width: 200px;
+  height: 100%;
+  overflow-y: auto;
+}

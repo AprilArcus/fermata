@@ -8,7 +8,8 @@ Dianthus.Views.SessionForm = Backbone.View.extend({
 
   template: JST['session/form'],
 
-  events: {'submit form': 'submit'},
+  events: {'submit form': 'submit',
+           'click #new-user': 'newUser'},
 
   submit: function() {
     event.preventDefault();
@@ -32,6 +33,12 @@ Dianthus.Views.SessionForm = Backbone.View.extend({
               console.log('fail');
             }
     });
+  },
+
+  newUser: function() {
+    var formData = $('#session-form').serializeJSON();
+    console.log(formData);
+    // Dianthus.currentUser = new Dianthus.Models.User();
   },
 
   render: function() {

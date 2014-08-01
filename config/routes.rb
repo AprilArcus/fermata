@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json } do
     resource :session, only: [:create, :destroy]
-    resources :users, only: [:show]
+    resources :users, only: [:show, :create]
     resources :loops, only: [:show, :create, :update, :destroy]
     resources :verses, only: [:show, :create, :update, :destroy]
     resources :measures, only: [:show] if Rails.env.development?
