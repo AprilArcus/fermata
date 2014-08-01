@@ -5,14 +5,14 @@ window.Dianthus = {
   Routers: {},
   initialize: function() {
     // alert('Hello from Backbone!');
-    new Dianthus.Routers.Router( {$el: $('#Dianthus-Routers-SwapView-Target')} );
-    Backbone.history.start();
     MIDI.loadPlugin({
       soundfontUrl: "/assets/soundfont/",
       instrument: "acoustic_grand_piano",
       callback: function() {
         MIDI.setVolume(0, 127);
         // this would be a good place to halt a load indicator
+        new Dianthus.Routers.Router( {$el: $('#Dianthus-Routers-SwapView-Target')} );
+        Backbone.history.start();
       }
     });
 

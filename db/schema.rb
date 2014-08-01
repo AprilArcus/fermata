@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728222440) do
+ActiveRecord::Schema.define(version: 20140801034453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140728222440) do
     t.string   "color",       null: false
   end
 
+  add_index "loops", ["author_id", "title"], name: "index_loops_on_author_id_and_title", using: :btree
   add_index "loops", ["author_id"], name: "index_loops_on_author_id", using: :btree
 
   create_table "measure_loops", force: true do |t|
@@ -39,6 +40,9 @@ ActiveRecord::Schema.define(version: 20140728222440) do
     t.datetime "updated_at"
   end
 
+  add_index "measure_loops", ["loop_id"], name: "index_measure_loops_on_loop_id", using: :btree
+  add_index "measure_loops", ["measure_id"], name: "index_measure_loops_on_measure_id", using: :btree
+
   create_table "measures", force: true do |t|
     t.integer  "verse_id",     null: false
     t.integer  "ord",          null: false
@@ -46,6 +50,8 @@ ActiveRecord::Schema.define(version: 20140728222440) do
     t.datetime "updated_at"
     t.integer  "scale_degree", null: false
   end
+
+  add_index "measures", ["verse_id"], name: "index_measures_on_verse_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "password_digest", null: false
