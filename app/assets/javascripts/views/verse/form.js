@@ -16,7 +16,7 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
 
     this.playhead = this.drawPlayhead();
 
-    this.bpm = 90;
+    this.bpm = 100;
     this.timeIndex = 0;
 
     this.key = MIDI.keyToNote.C4;

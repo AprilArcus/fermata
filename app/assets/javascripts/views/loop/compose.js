@@ -4,7 +4,7 @@ Dianthus.Views.LoopCompose = Backbone.View.extend({
     this.key = MIDI.keyToNote[this.model.get('key') + '4'];
     this.mode = Dianthus.Modes[this.model.get('mode')];
     this.timeSlices = this.model.get('time_slices');
-    this.bpm = 120;
+    this.bpm = 100;
     this.timeIndex = 0;
     this.playing = true;
   },
