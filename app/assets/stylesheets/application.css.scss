@@ -573,6 +573,10 @@ select.scale-degree {
   color: $text-color; /* weird darkly / bootswatch oversight? */
 }
 
+#new-session .modal-header {
+  text-align: center;
+}
+
 #new-session .modal-footer {
   display: -webkit-flex;
   display: flex;

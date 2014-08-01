@@ -36,13 +36,21 @@ Dianthus.Views.SessionForm = Backbone.View.extend({
   },
 
   newUser: function() {
+    // event.preventDefault();
+    // event.stopPropagation();
     var parentView = this.parentView;
     var formData = $('#session-form').serializeJSON();
     var payload = {user: formData};
-    new Dianthus.Models.User(payload).save({success:
-      function(model, status, response) {
+    new Dianthus.Models.User(payload).save({}, {
+      success: function(model, status, response) {
         Dianthus.currentUser = model;
         parentView.trigger('signInSuccess');
+      },
+      error: function(model, status, response) {
+        console.log(model);
+        console.log(status);
+        console.log(response);
+        throw 'save new user failed';
       }
     });
   },

@@ -10,6 +10,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
   id: 'Dianthus-Views-LoopComposeForm-Container',
 
   events: {'click #play-pause': 'playPause',
+           'click #sign-in-out': 'signInOut',
            'change select': 'syncRadioToSelect',
            'change input[type="radio"]': 'syncSelectToRadio',
            'change input[type="radio"][name="key"]': 'updateKey',
@@ -26,6 +27,25 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
       this.composer.pause();
     } else {
       this.composer.play();
+    }
+  },
+
+  signInOut: function(event) {
+    if (Dianthus.currentUser) {
+
+      $.ajax({url: '/api/session',
+              type: 'delete',
+              success: function(model, status, response) {
+                delete Dianthus.currentUser;
+                document.getElementById('sign-in').classList.remove('hidden');
+                document.getElementById('sign-out').classList.add('hidden');
+              }, error: function() {
+                throw 'fail in signout';
+              }
+      });
+
+    } else {
+      $('#new-session').modal();
     }
   },
 
@@ -95,7 +115,9 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
             { patch: !loop.isNew(),
               success: function() {
                 Dianthus.currentUser.loops.add(loop, {merge: true});
-                Backbone.history.navigate('#', {trigger: true}); // TODO: 'back'
+                // console.log(Backbone.history.history.back);
+                // Backbone.history.navigate('#', {trigger: true}); // TODO: 'back'
+                Backbone.history.history.back();
               },
               error: function(model, response) {
                 if (response.status === 401) {
@@ -117,6 +139,8 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
   signInSuccess: function() {
     this.signInDidSucceed = true;
     $('#new-session').modal('hide');
+    document.getElementById('sign-in').classList.add('hidden');
+    document.getElementById('sign-out').classList.remove('hidden');
   },
 
   completeFormSubmission: function() {

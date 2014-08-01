@@ -141,11 +141,22 @@
       <form class="navbar-form navbar-right">
         <div class="form-group navbar-right">
           <!-- <label class="control-label hidden-xs">Guest</label> -->
-          <label class="sr-only" for="title">Sign Out</label>
+          <label class="sr-only" for="title">Sign In/Out</label> <!-- TODO this is an accessibility sin! -->
           <button type="button"
-                  id="sign-out"
+                  id="sign-in-out"
                   class="btn btn-default">
-            <span class="glyphicon glyphicon-log-out"></span>
+            <span id="sign-out" class="glyphicon
+                                       glyphicon-log-out
+                                       <% if (!Dianthus.currentUser) { %>
+                                       hidden
+                                       <% } %>
+                                       "></span>
+            <span id="sign-in" class="glyphicon
+                                      glyphicon-log-in
+                                       <% if (Dianthus.currentUser) { %>
+                                       hidden
+                                       <% } %>
+                                      "></span>
           </button>
         </div> <!-- /.form-group -->
       </form>
