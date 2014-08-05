@@ -88,7 +88,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
   },
 
   updateUIColor: function(color) {
-    this.el.style['background-color'] = color;
+    this.el.style.backgroundColor = color;
     this.el.style.color = Dianthus.getForegroundColor(color);
   },
 
