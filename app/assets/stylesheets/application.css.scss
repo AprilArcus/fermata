@@ -51,13 +51,13 @@ select.form-control {
 html,
 body,
 #Dianthus-Routers-SwapView-Target,
-#Dianthus-Views-LoopComposeForm-Container,
-#Dianthus-Views-LoopComposeForm,
+#Dianthus-Views-Loop-ComposeForm-Container,
+#Dianthus-Views-ComposeForm,
 #Dianthus-Views-VerseForm {
   height: 100%;
 }
 
-#Dianthus-Views-LoopComposeForm {
+#Dianthus-Views-ComposeForm {
   display: -webkit-flex;
   display: flex;
 
@@ -65,13 +65,13 @@ body,
   -webkit-flex-direction: column;
 }
 
-#Dianthus-Views-LoopCompose-Target, #Dianthus-Views-VerseForm {
+#Dianthus-Views-ComposeForm-ComposerTarget, #Dianthus-Views-VerseForm {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
 }
 
-#Dianthus-Views-LoopCompose-Target {
+#Dianthus-Views-ComposeForm-ComposerTarget {
   -webkit-flex-grow: 1;
   flex-grow: 1;
 
@@ -192,7 +192,7 @@ body,
   border-bottom-left-radius: 0;
 }
 
-#Dianthus-Views-LoopComposeForm {
+#Dianthus-Views-ComposeForm {
   .navbar {
     margin-bottom: 0;
     border-radius: 0;
@@ -231,11 +231,11 @@ body,
 
 }
 
-#Dianthus-Views-LoopComposeForm-Options {
+#Dianthus-Views-ComposeForm-Options {
   border-top: none;
 }
 
-#Dianthus-Views-LoopComposeForm-Submit {
+#Dianthus-Views-ComposeForm-Submit {
   border-bottom: none;
 
   .alert {
@@ -327,7 +327,7 @@ input:checked {
 }
 
 @media screen and (min-width: 481px) {
-  #Dianthus-Views-LoopComposeForm-Submit .alert-danger > .alert-message {
+  #Dianthus-Views-ComposeForm-Submit .alert-danger > .alert-message {
     display: inline;
   }
 }
@@ -338,7 +338,7 @@ input:checked {
 }
 
 .loops-list {
-  position: relative; /* allow the ui-draggable proxy to inherit our width */
+  /*position: relative;*/ /* allow the ui-draggable proxy to inherit our width */
 }
 
 #measures-list {
@@ -365,8 +365,7 @@ select.scale-degree {
   display: -webkit-flex;
   display: flex;
   margin: $padding-base-vertical*2 0;
-  width: 100%; /* unnecessary but harmless for flexbox; but helps our
-                  ui-draggable proxy maintain a consistent look and feel */
+  /*width: 100%;*/
 }
 
 .measure-loop-placeholder {
@@ -426,18 +425,40 @@ select.scale-degree {
   box-shadow: none;
 }
 
+
+.measure-loop.white {
+  color: white;
+}
+
+.measure-loop.black {
+  color: black;
+}
+
+.measure-loop * {
+  color: inherit;
+}
+
 .measure-loop .dropdown-menu {
   left: auto;
   right: 0;
 }
 
-.measure-loop .dropdown-menu a:hover {
-  background-color: rgba(127, 127, 127, 0.5); /* brittle - will fail on
-                                                 gray menus */
+.measure-loop .dropdown-menu a {
+  color: inherit;
+}
+
+.measure-loop.white .dropdown-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: black;
+}
+
+.measure-loop.black .dropdown-menu a:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+  color: white;
 }
 
 
-#measures-list, Dianthus-Views-LoopCompose-Target {
+#measures-list {
   display: -webkit-flex;
   display: flex;
   margin-bottom: 0;
@@ -478,8 +499,8 @@ select.scale-degree {
   -webkit-flex-basis: 0;
   flex-basis: 0;
 
-  /*overflow-y: auto;*/
-  /*overflow-x: hidden;*/
+  overflow-y: auto;
+  overflow-x: hidden;
 
   margin-bottom: 0;
 }
@@ -525,14 +546,6 @@ select.scale-degree {
   .loop-index .gravatar {
     margin-bottom: $padding-small-vertical*2 0;
   }
-}
-
-.loop-index .panel-title {
-/*  display: inline;
-  font-size: ceil(($font-size-base * 2.3));
-  font-family: 'Proxima Nova';
-  position: absolute;
-  bottom: 4px;*/
 }
 
 #new-loop {

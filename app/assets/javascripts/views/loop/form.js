@@ -2,12 +2,12 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.composer = new Dianthus.Views.LoopCompose({model: this.model});
-    this.addSubview('#Dianthus-Views-LoopCompose-Target', this.composer);
+    this.addSubview('#Dianthus-Views-ComposeForm-ComposerTarget', this.composer);
     this.addSubview('#new-session', new Dianthus.Views.SessionForm({parentView: this}));
     this.listenTo(this, 'signInSuccess', this.signInSuccess);
   },
 
-  id: 'Dianthus-Views-LoopComposeForm-Container',
+  id: 'Dianthus-Views-Loop-ComposeForm-Container',
 
   events: {'click #play-pause': 'playPause',
            'click #sign-in-out': 'signInOut',
@@ -15,6 +15,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
            'change input[type="radio"]': 'syncSelectToRadio',
            'change input[type="radio"][name="key"]': 'updateKey',
            'change input[type="radio"][name="mode"]': 'updateMode',
+           'change select[name="instrument"]': 'updateInstrument',
            'change #color': 'updateColor',
            'focus #title': 'highlightSave',
            'blur #title': 'dimSave',
@@ -82,6 +83,10 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     this.composer.mode = Dianthus.Modes[event.target.value];
   },
 
+  updateInstrument: function(event) {
+    this.composer.instrument = event.target[event.target.selectedIndex].value;
+  },
+
   updateColor: function(event) {
     var color = event.target.value;
     this.updateUIColor(color);
@@ -102,7 +107,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
 
   submit: function(event) {
     event.preventDefault();
-    var options = $('#Dianthus-Views-LoopComposeForm-Options form').serializeJSON();
+    var options = $('#Dianthus-Views-ComposeForm-Options form').serializeJSON();
     var formData = $(event.target).serializeJSON();
     _(formData).extend(options);
     var loop = this.model;
@@ -155,6 +160,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     this.$el.html(rendered);
     this.updateUIColor(this.model.get('color'));
     this.attachSubviews();
+    this.$('select[name="instrument"] > option[value="' + this.model.get('instrument') + '"]').prop('selected', true);
     return this;
   }
 

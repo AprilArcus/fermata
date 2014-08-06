@@ -193,7 +193,7 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
                        cursor: 'no-drop',
                        connectToSortable: '.measure-loops-list',
                        // revert: 150,
-                       // appendTo: '#users-list-append-target',
+                       appendTo: '#Dianthus-Views-VerseForm',
                        scroll: false,
                        helper: 'clone',
                      });

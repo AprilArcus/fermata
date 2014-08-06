@@ -1,5 +1,5 @@
-<div id="Dianthus-Views-LoopComposeForm">
-  <div id="Dianthus-Views-LoopComposeForm-Options"
+<div id="Dianthus-Views-ComposeForm">
+  <div id="Dianthus-Views-ComposeForm-Options"
        class="navbar navbar-default">
     <div class="container-fluid">
       <form class="navbar-form">
@@ -132,8 +132,8 @@
             on the
           </label>
           <select id="instrument" name="instrument" class="form-control">
-            <option selected="selected">Acoustic Grand Piano</option>
-            <option>Synth Drums</option>
+            <option value="0">Acoustic Grand Piano</option>
+            <option value="118">Synth Drums</option>
           </select>
         </div> <!-- /.form-group -->
       </form>
@@ -164,9 +164,9 @@
     </div>
   </div>
 
-  <div id="Dianthus-Views-LoopCompose-Target"></div>
+  <div id="Dianthus-Views-ComposeForm-ComposerTarget"></div>
 
-  <div id="Dianthus-Views-LoopComposeForm-Submit"
+  <div id="Dianthus-Views-ComposeForm-Submit"
        class="navbar navbar-default">
     <div class="container-fluid">
       <form class="navbar-form navbar-right">
@@ -207,7 +207,7 @@
       </form>
     </div>
   </div>
-</div> <!-- /#Dianthus-Views-LoopComposeForm -->
+</div> <!-- /#Dianthus-Views-ComposeForm -->
 <div class="modal fade"
      id="new-session"
      tabindex="-1"

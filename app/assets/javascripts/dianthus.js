@@ -9,6 +9,16 @@ window.Dianthus = {
       soundfontUrl: "/assets/soundfont/",
       instrument: "acoustic_grand_piano",
       callback: function() {
+        // load the synth drums incrementally to avoid preposterous wait
+        // times. h/t erstwhile, http://midi.backtrace.us/minimalism.html
+        MIDI.loadPlugin({
+          instruments: [ "acoustic_grand_piano", "synth_drum" ],
+          callback: function() {
+            MIDI.programChange(0, 0);
+            MIDI.programChange(1, 118);
+            Dianthus.instrumentsLoaded = true;
+          }
+        });
         MIDI.setVolume(0, 127);
         // this would be a good place to halt a load indicator
         new Dianthus.Routers.Router( {$el: $('#Dianthus-Routers-SwapView-Target')} );
@@ -47,6 +57,8 @@ Dianthus.ChordSymbols.MAJOR  =
 Dianthus.ChordSymbols.AEOLIAN =
 Dianthus.ChordSymbols.MINOR =
 ['I min', 'II dim', '♭III Maj', 'IV min', 'V min', '♭VI Maj', '♭VII dim'];
+
+Dianthus.MidiInstrumenToMidiJSInstrument = {0: 0, 118: 1};
 
 //Utility functions
 Dianthus.transpose = function(noteIndex, key, mode) {

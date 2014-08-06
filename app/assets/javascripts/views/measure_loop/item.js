@@ -3,7 +3,7 @@ Dianthus.Views.MeasureLoopItem = Backbone.View.extend({
 
   tagName: 'li',
 
-  className: 'btn-group measure-loop',
+  className: function () {return 'btn-group measure-loop ' + Dianthus.getForegroundColor(this.model.loop.escape('color'));},
 
   attributes: function() {
     return {'data-measure-loop-id': this.model.id};
