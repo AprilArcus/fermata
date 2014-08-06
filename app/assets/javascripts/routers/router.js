@@ -49,7 +49,7 @@ Dianthus.Routers.Router = Backbone.Router.extend({
     var verse = new Dianthus.Models.Verse({id: id});
     var router = this;
     verse.fetch({success: function() {
-      var verseFormView = new Dianthus.Views.VerseForm({ model: verse });
+      var verseFormView = new Dianthus.Views.VerseCompose({ model: verse });
       router._swapView(verseFormView);
       }
     });

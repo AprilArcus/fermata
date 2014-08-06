@@ -53,7 +53,7 @@ body,
 #Dianthus-Routers-SwapView-Target,
 #Dianthus-Views-Loop-ComposeForm-Container,
 #Dianthus-Views-ComposeForm,
-#Dianthus-Views-VerseForm {
+#Dianthus-Views-VerseCompose {
   height: 100%;
 }
 
@@ -65,7 +65,7 @@ body,
   -webkit-flex-direction: column;
 }
 
-#Dianthus-Views-ComposeForm-ComposerTarget, #Dianthus-Views-VerseForm {
+#Dianthus-Views-ComposeForm-ComposerTarget, #Dianthus-Views-VerseCompose {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -488,7 +488,7 @@ select.scale-degree {
 
 
 
-#Dianthus-Views-VerseForm {
+#Dianthus-Views-VerseCompose {
   display: -webkit-flex;
   display: flex;
 }
@@ -585,7 +585,7 @@ select.scale-degree {
 
 /*************** title buttons ************/
 
-#Dianthus-Views-VerseForm {
+#Dianthus-Views-VerseCompose {
   .loop > .btn:first-child, .measure-loop > .btn:first-child {
     border-right: 0;
   }

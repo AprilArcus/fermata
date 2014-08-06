@@ -1,8 +1,8 @@
-Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
+Dianthus.Views.VerseCompose = Backbone.CompositeView.extend({
 
   template: JST['verse/form'],
 
-  id: 'Dianthus-Views-VerseForm',
+  id: 'Dianthus-Views-VerseCompose',
 
   initialize: function() {
     var _this = this;
@@ -193,7 +193,7 @@ Dianthus.Views.VerseForm = Backbone.CompositeView.extend({
                        cursor: 'no-drop',
                        connectToSortable: '.measure-loops-list',
                        // revert: 150,
-                       appendTo: '#Dianthus-Views-VerseForm',
+                       appendTo: '#Dianthus-Views-VerseCompose',
                        scroll: false,
                        helper: 'clone',
                      });
