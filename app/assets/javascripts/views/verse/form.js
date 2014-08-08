@@ -109,7 +109,7 @@ Dianthus.Views.VerseComposeForm = Backbone.CompositeView.extend({
             { patch: true,
               success: function() {
                 Dianthus.currentUser.verses.add(verse, {merge: true});
-                Backbone.history.history.back();
+                Backbone.history.navigate('#', {trigger: true});
               },
               error: function(model, response) {
                 if (response.status === 422) {
