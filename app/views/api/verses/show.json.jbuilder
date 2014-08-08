@@ -1,4 +1,4 @@
-json.extract! @verse, :id, :author_id, :title, :key, :mode
+json.extract! @verse, :id, :author_id, :title, :key, :mode, :color
 
 json.measures @verse.measures do |measure|
   json.extract! measure, :id, :ord, :scale_degree

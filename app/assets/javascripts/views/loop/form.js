@@ -156,10 +156,10 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
   template: JST['loop/form'],        
 
   render: function() {
-    var rendered = this.template( {loop: this.model} );
+    var rendered = this.template( {model: this.model} );
     this.$el.html(rendered);
-    this.updateUIColor(this.model.get('color'));
     this.attachSubviews();
+    this.updateUIColor(this.model.get('color'));
     this.$('select[name="instrument"] > option[value="' + this.model.get('instrument') + '"]').prop('selected', true);
     return this;
   }

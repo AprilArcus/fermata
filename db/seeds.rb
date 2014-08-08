@@ -83,8 +83,10 @@ down = april.loops.create(time_slices: '[[{"velocity":0,"duration":1},{"velocity
 
 v = april.verses.create(title: 'Lux Æterna',
                         key: 'Bb',
-                        mode: 'MAJOR')
+                        mode: 'MAJOR',
+                        color: '#cccccc')
 
 v = april.verses.create(title: 'Fiddling Around',
                         key: 'C',
-                        mode: 'MAJOR')
+                        mode: 'MAJOR',
+                        color: '#cccccc')

@@ -28,11 +28,10 @@
                      name="key"
                      value="F">F
             </label>
-            <label class="btn btn-default active">
+            <label class="btn btn-default">
               <input type="radio"
                      name="key"
-                     value="C"
-                     checked>C
+                     value="C">C
             </label>
             <label class="btn btn-default">
               <input type="radio"
@@ -108,11 +107,10 @@
           <div id="mode-radio"
                class="btn-group"
                data-toggle="buttons">
-            <label class="btn btn-default active">
+            <label class="btn btn-default">
               <input type="radio"
                      name="mode"
-                     value="MAJOR"
-                     checked="checked">Major
+                     value="MAJOR">Major
             </label>
             <label class="btn btn-default">
               <input type="radio"
@@ -178,7 +176,7 @@
           <input type="color"
                  name="color"
                  class="form-control"
-                 value="<%= loop.escape('color') %>"
+                 value="<%= model.escape('color') %>"
                  id="color"> <!-- TODO polyfill available:
                                   http://bgrins.github.io/spectrum/ -->
         </div> <!-- /.form-group -->
@@ -193,8 +191,8 @@
                    name="title"
                    class="form-control"
                    id="title"
-                   <% if (!loop.isNew()) { %>
-                   value="<%= loop.escape('title') %>"
+                   <% if (!model.isNew()) { %>
+                   value="<%= model.escape('title') %>"
                    <% } %>
                    placeholder="Untitled">
           </div> <!-- /.form-group -->

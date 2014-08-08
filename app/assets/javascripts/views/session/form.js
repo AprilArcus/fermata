@@ -11,7 +11,7 @@ Dianthus.Views.SessionForm = Backbone.View.extend({
   events: {'submit form': 'submit',
            'click #new-user': 'newUser'},
 
-  submit: function() {
+  submit: function(event) {
     event.preventDefault();
     event.stopPropagation();
     var formData = $(event.target).serializeJSON();

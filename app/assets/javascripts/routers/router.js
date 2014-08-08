@@ -25,6 +25,8 @@ Dianthus.Routers.Router = Backbone.Router.extend({
       model: new Dianthus.Models.Loop()
     });
     this._swapView(loopComposeView);
+    $('input[name="key"][value="C"]').click();
+    $('input[name="mode"][value="MAJOR"]').click();
   },
 
   loopUpdate: function(id) {
@@ -33,6 +35,8 @@ Dianthus.Routers.Router = Backbone.Router.extend({
     loop.fetch({success: function() {
         var loopComposeFormView = new Dianthus.Views.LoopComposeForm({model: loop});
         router._swapView(loopComposeFormView);
+        $('input[name="key"][value="' + loop.get('key') + '"]').click();
+        $('input[name="mode"][value="' + loop.get('mode') + '"]').click();
       }
     });
   },
@@ -49,8 +53,10 @@ Dianthus.Routers.Router = Backbone.Router.extend({
     var verse = new Dianthus.Models.Verse({id: id});
     var router = this;
     verse.fetch({success: function() {
-      var verseFormView = new Dianthus.Views.VerseCompose({ model: verse });
+      var verseFormView = new Dianthus.Views.VerseComposeForm({ model: verse });
       router._swapView(verseFormView);
+      $('input[name="key"][value="' + verse.get('key') + '"]').click();
+      $('input[name="mode"][value="' + verse.get('mode') + '"]').click();
       }
     });
   },

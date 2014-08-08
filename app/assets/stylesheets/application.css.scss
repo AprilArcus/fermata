@@ -52,8 +52,10 @@ html,
 body,
 #Dianthus-Routers-SwapView-Target,
 #Dianthus-Views-Loop-ComposeForm-Container,
+#Dianthus-Views-Verse-ComposeForm-Container,
 #Dianthus-Views-ComposeForm,
-#Dianthus-Views-VerseCompose {
+/*#Dianthus-Views-VerseCompose*/
+{
   height: 100%;
 }
 
@@ -77,10 +79,19 @@ body,
 
   display: -webkit-flex;
   display: flex;
+}
 
-  flex-direction: column;
+#Dianthus-Views-Loop-ComposeForm-Container #Dianthus-Views-ComposeForm-ComposerTarget {
   -webkit-flex-direction: column;
+  flex-direction: column;
+}
 
+#Dianthus-Views-VerseCompose {
+  width: 100%;
+}
+
+#Dianthus-Views-Loop-ComposeForm-Container #Dianthus-Views-ComposeForm-ComposerTarget,
+#Dianthus-Views-Verse-ComposeForm-Container #Dianthus-Views-ComposeForm-ComposerTarget {
   border-left: $grid-gutter-width/2 solid $body-bg;
   border-right: $grid-gutter-width/2 solid $body-bg;
 }
@@ -347,13 +358,6 @@ input:checked {
 
   -webkit-flex-basis: 0;
   flex-basis: 0;
-
-  margin-right: $grid-gutter-width/2;
-}
-
-select.scale-degree {
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
 }
 
 .measure-loops-list {
@@ -361,11 +365,12 @@ select.scale-degree {
   flex-grow: 1;
 }
 
-.loop, .measure-loop, .measure-loop-placeholder {
+.loop, .measure-loop, .measure-loop-placeholder, select.scale-degree {
   display: -webkit-flex;
   display: flex;
-  margin: $padding-base-vertical*2 0;
-  /*width: 100%;*/
+  margin-bottom: $padding-base-vertical*2;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .measure-loop-placeholder {
@@ -462,9 +467,12 @@ select.scale-degree {
   display: -webkit-flex;
   display: flex;
   margin-bottom: 0;
+  border-left: $grid-gutter-width/2 solid $body-bg;
 }
 
 .measure {
+  z-index: 1;
+
   -webkit-flex-grow: 1;
   flex-grow: 1;
   -webkit-flex-basis: 0;
@@ -475,7 +483,12 @@ select.scale-degree {
   -webkit-flex-direction: column;
   flex-direction: column;
 
-  margin-left: $grid-gutter-width/2;
+  margin: $grid-gutter-width/2;
+  margin-right: 0;
+}
+
+.measure:first-of-type {
+  margin-left: 0;
 }
 
 #measures-list > li:last-child {
@@ -503,11 +516,17 @@ select.scale-degree {
   overflow-x: hidden;
 
   margin-bottom: 0;
+
+  background-color: $body-bg;
+}
+
+.loop-index {
+  margin-top: $grid-gutter-width/2;
 }
 
 .loop-index .panel-heading {
   border: none;    /* visual clutter */
-  padding-top: 15px;
+  padding-top: 0;
   padding-bottom: 0;
   /*height: $input-height-base*2 + $padding-base-vertical*2;*/
   /*position: relative;*/
@@ -516,10 +535,6 @@ select.scale-degree {
 
 .panel {
   border: none;
-}
-
-.loop-index {
-  margin-left: $grid-gutter-width/2;
 }
 
 
@@ -535,17 +550,6 @@ select.scale-degree {
 
 .gravatar {
   border-radius: $border-radius-base;
-}
-
-.loop-index .gravatar {
-  width: 100%;
-  margin-bottom: $padding-base-vertical*2 0;
-}
-
-@media screen and (max-width: 480px) {
-  .loop-index .gravatar {
-    margin-bottom: $padding-small-vertical*2 0;
-  }
 }
 
 #new-loop {
@@ -564,12 +568,11 @@ select.scale-degree {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: $panel-body-padding;
+  left: 0;
   right: 0;
-  z-index: -1;
 
   display: -webkit-flex;
-  display: -flex;
+  display: flex;
 }
 
 @-webkit-keyframes verse-time-slice-highlight {

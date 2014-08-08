@@ -18,8 +18,11 @@
 <img class="gravatar" src="<%= user.escape('gravatar_url') %>">
 <ul id="user-show-verses" class="nav nav-pills nav-stacked">
   <% user.verses.each(function(verse) { %>
+  <% var bgcolor = verse.escape('color') %>
+  <% var fgcolor = Dianthus.getForegroundColor(bgcolor) %>
   <li>
-    <a href="#/verses/<%= verse.escape('id') %>/edit">
+    <a href="#/verses/<%= verse.escape('id') %>/edit"
+       style="background-color: <%= bgcolor %>; color: <%= fgcolor %>">
       <%= verse.escape('title') %>
     </a>
   </li>

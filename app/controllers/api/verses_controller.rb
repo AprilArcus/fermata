@@ -15,7 +15,7 @@ module Api
       # to generate a template on the server
       Verse.transaction do
         begin
-          @verse = current_user.verses.create(title: 'untitled', key: 'C', mode: 'MAJOR')
+          @verse = current_user.verses.create(title: 'untitled', key: 'C', mode: 'MAJOR', color: '#cccccc')
           render json: {id: @verse.id}
         rescue
           render json: @verse.errors, status: :unprocessable_entity
@@ -41,7 +41,7 @@ module Api
 
     private
     def verse_params
-      params.require(:verse).permit(:key, :mode)
+      params.require(:verse).permit(:key, :mode, :title, :color)
     end
 
   end
