@@ -50,14 +50,17 @@ Dianthus.Views.VerseCompose = Backbone.CompositeView.extend({
     var measureLoops = measure.measure_loops;
     measureLoops.each(function(measureLoop){
       var timeSlices = measureLoop.loop.get('time_slices');
+      var instrument = Dianthus.MidiInstrumenToMidiJSInstrument[measureLoop.get('instrument')];
       var notes = timeSlices[timeIndex % 16];
       _(notes).each(function(note, noteIndex) {
         if (note.velocity > 0) {
           var velocity = note.velocity;
           var MidiNote = Dianthus.transpose(noteIndex, key, mode);
           MidiNote += mode[scaleDegree];
-          MIDI.noteOn(0, MidiNote, note.velocity, 0);
-          MIDI.noteOff(0, MidiNote, 0.75);
+          if (instrument === 0 || Dianthus.instrumentsLoaded) {
+            MIDI.noteOn(instrument, MidiNote, note.velocity, 0);
+            MIDI.noteOff(instrument, MidiNote, 0.75);
+          }
         }
       });
     });

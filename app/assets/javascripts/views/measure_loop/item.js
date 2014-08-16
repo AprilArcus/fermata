@@ -9,7 +9,8 @@ Dianthus.Views.MeasureLoopItem = Backbone.View.extend({
     return {'data-measure-loop-id': this.model.id};
   },
 
-  events: { 'click .destroy': 'destroy' },
+  events: { 'click .destroy': 'destroy',
+            'click ul.dropdown-menu.instrument': 'updateInstrument' },
 
   destroy: function() {
     var _this = this;
@@ -17,6 +18,11 @@ Dianthus.Views.MeasureLoopItem = Backbone.View.extend({
         _this.trigger('remove', _this);
       }
     });
+  },
+
+  updateInstrument: function(event) {
+    var instrument = event.target.getAttribute('value');
+    this.model.save({instrument: instrument}, {patch: true});
   },
 
   render: function() {

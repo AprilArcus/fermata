@@ -63,8 +63,6 @@ Dianthus.Views.MeasureForm = Backbone.CompositeView.extend({
             $(node).replaceWith(measureLoopItemView.render().el);
           }
         });
-        //
-        
       }
     });
   },

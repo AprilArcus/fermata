@@ -2,6 +2,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.composer = new Dianthus.Views.LoopCompose({model: this.model});
+    this.addSubview('#instrument-target', new Dianthus.Views.LoopComposeInstruments());
     this.addSubview('#Dianthus-Views-ComposeForm-ComposerTarget', this.composer);
     this.addSubview('#new-session', new Dianthus.Views.SessionForm({parentView: this}));
     this.listenTo(this, 'signInSuccess', this.signInSuccess);
@@ -153,7 +154,7 @@ Dianthus.Views.LoopComposeForm = Backbone.CompositeView.extend({
     this.signInDidSucceed = false;
   },
                                        
-  template: JST['loop/form'],        
+  template: JST.compose_form,
 
   render: function() {
     var rendered = this.template( {model: this.model} );

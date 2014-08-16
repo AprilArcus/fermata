@@ -125,7 +125,7 @@ Dianthus.Views.VerseComposeForm = Backbone.CompositeView.extend({
             });
   },
                                        
-  template: JST['loop/form'],        
+  template: JST.compose_form,
 
   render: function() {
     var rendered = this.template( {model: this.model} );
